@@ -4,9 +4,21 @@
 \\=====================//
  */
 const router = require('express').Router();
-const asyncHandler = require('express-async-handler');
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth.js');
-const { User } = require('../../db/models');
+const sessionRouter = require('./session.js');
+const usersRouter = require('./users.js');
+
+
+
+
+/*
+//=====================\\
+||SETUP----------------||
+\\=====================//
+ */
+router.use('/session', sessionRouter);
+router.use('/users', usersRouter);
+
+
 
 
 /*
@@ -19,6 +31,10 @@ router.post('/test', function(req, res) {
     res.json({ requestBody: req.body });
 });
 
+//Imports to test auth flow
+// const asyncHandler = require('express-async-handler');
+// const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth.js');
+// const { User } = require('../../db/models');
 //Test Auth flow - token
 // router.get('/set-token-cookie', asyncHandler(async (req, res) => {
 //     const user = await User.findOne({
