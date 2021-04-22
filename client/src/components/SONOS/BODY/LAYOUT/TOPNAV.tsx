@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 
 import {Theme, useTheme} from '../../../../context/ThemeContext';
@@ -23,19 +24,27 @@ export default function BODY__CONTENT___TOPNAV(){
             <button onClick={ChangeTheme}>
                 { theme }
             </button>
-            <button>
-                Home
-            </button>
+            <Link to ='/home'>
+                <button>
+                    Home
+                </button>
+            </Link>
+
             <button>
                 Stream
             </button>
+
             <button>
                 Library
             </button>
             <input className='SearchBar' type="text" placeholder="Search.." name="search" />
-            <button>
-                Sign In
-            </button>
+
+            <Link to='/login'>
+                <button>
+                    Sign In
+                </button>
+            </Link>
+
             <button>
                 Create Account
             </button>

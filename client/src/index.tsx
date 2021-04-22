@@ -3,6 +3,7 @@
 ||INIT-----------------||
 \\=====================//
  */
+// @ts-nocheck
 //Style
 import './index.css';
 
@@ -14,6 +15,9 @@ import { BrowserRouter } from 'react-router-dom';
 //Csurf protections
 import { restoreCSRF, csrfFetch } from './store/csrf';
 
+//Session actions
+import * as sessionActions from './store/session';
+
 //Redux
 import { Provider } from 'react-redux';
 import configureStore from './store';
@@ -21,10 +25,9 @@ const store = configureStore();
 if (process.env.NODE_ENV !== 'production') {
     restoreCSRF();
 
-    // @ts-ignore
     window.csrfFetch = csrfFetch;
-    // @ts-ignore
     window.store = store;
+    window.sessionActions = sessionActions;
 }
 
 //Extras

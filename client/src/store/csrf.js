@@ -50,7 +50,7 @@ export async function csrfFetch(url, options = {}) {
 ||EXPORT---------------||
 \\=====================//
  */
-export default csrfFetch();
+export default csrfFetch;
 export function restoreCSRF() { // call this to get the "XSRF-TOKEN" cookie, should only be used in development
     return csrfFetch('/api/csrf/restore');
 }

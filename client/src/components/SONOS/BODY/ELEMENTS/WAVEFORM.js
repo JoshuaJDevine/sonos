@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 // @ts-ignore
-import WaveSurfer from "../../../../../plugins/wavesurfer.js";
+import WaveSurfer from "../../../../plugins/wavesurfer.js";
 
 // @ts-ignore
 const formWaveSurferOptions = ref => ({

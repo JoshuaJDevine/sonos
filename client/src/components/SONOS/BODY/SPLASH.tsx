@@ -1,10 +1,10 @@
 import React from 'react';
-import BODY__CONTENT___TOPNAV from "./BODY/LAYOUT/TOPNAV";
+import BODY__CONTENT___TOPNAV from "./LAYOUT/TOPNAV";
 import './SPLASH.css'
 
-export default function SPLASH(){
+export default function BODY__SPLASH(){
     return(
-        <div className={'SPLASH'}>
+        <div className={'BODY__SPLASH'}>
             <BODY__CONTENT___TOPNAV />
             <img src='/img/sp1.jpg'/>
         </div>

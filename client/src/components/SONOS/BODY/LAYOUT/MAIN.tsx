@@ -1,8 +1,8 @@
-import BODY__CONTENT___LISTLARGE from "./ELEMENTS/LISTLARGE";
-import BODY__CONTENT___TABS from "./ELEMENTS/TABS";
-import BODY__CONTENT___CAROUSEL from "./ELEMENTS/CAROUSEL";
-import Waveform from "./ELEMENTS/WAVEFORM";
-import PlayList from "./ELEMENTS/PLAYLIST";
+import BODY__CONTENT___LISTLARGE from "../ELEMENTS/LISTLARGE";
+import BODY__CONTENT___TABS from "../ELEMENTS/TABS";
+import BODY__CONTENT___CAROUSEL from "../ELEMENTS/CAROUSEL";
+import Waveform from "../ELEMENTS/WAVEFORM";
+import PlayList from "../ELEMENTS/PLAYLIST";
 import React, {useState} from "react";
 
 export default function BODY__CONTENT___MAIN(){
