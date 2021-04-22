@@ -1,4 +1,5 @@
-import React from 'react';
+// @ts-nocheck
+import React, { useState, useEffect } from "react";
 import {Route, Switch} from "react-router-dom";
 
 
@@ -8,19 +9,20 @@ import BODY__LOGIN from "./BODY/LOGIN";
 
 
 export default function BODY(){
-    return(
-                <div className='BODY'>
-                    <Switch>
-                        <Route path='/home'>
-                            <BODY__CONTENT />
-                        </Route>
-                        <Route path='/login'>
-                            <BODY__LOGIN />
-                        </Route>
-                        <Route path='/'>
-                            <BODY__SPLASH />
-                        </Route>
-                    </Switch>
-                </div>
+
+    return (
+        <div className='BODY'>
+            <Switch>
+                <Route path='/home'>
+                    <BODY__CONTENT />
+                </Route>
+                <Route path='/login'>
+                    <BODY__LOGIN />
+                </Route>
+                <Route path='/'>
+                    <BODY__SPLASH />
+                </Route>
+            </Switch>
+        </div>
     )
 }

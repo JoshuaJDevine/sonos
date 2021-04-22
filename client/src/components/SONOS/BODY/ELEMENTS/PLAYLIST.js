@@ -4,7 +4,7 @@ import './PLAYLIST.css'
 // eslint-disable-next-line react/prop-types
 const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
 
-    console.log("=======",tracks, selectedTrack);
+    // console.log("=======",tracks, selectedTrack);
     return (
         <div>
             <div className="playlist">

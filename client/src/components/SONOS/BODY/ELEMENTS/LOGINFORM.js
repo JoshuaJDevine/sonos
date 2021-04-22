@@ -12,9 +12,13 @@ export default function BODY__ELEMENTS___LOGINFORM() {
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
-    if (sessionUser) return (
-        <Redirect to="/" />
-    );
+    if (sessionUser) {
+        console.log("User", sessionUser, " is logged in. Redirecting to /home")
+        return (
+            <Redirect to="home" />
+        );
+    }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();

@@ -30,10 +30,16 @@ export default function Waveform({ url }) {
     // create new WaveSurfer instance
     // On component mount and when url changes
     useEffect(() => {
+
         setPlay(false);
 
-        const options = formWaveSurferOptions(waveformRef.current);
+
+        const options = formWaveSurferOptions(waveformRef.current)
+
+        console.log("Prepping load Wavesurfer");
+
         wavesurfer.current = WaveSurfer.create(options);
+
 
         // @ts-ignore
         wavesurfer.current.load(url);
