@@ -17,7 +17,7 @@ const router = express.Router();
 ||ROUTES---------------||
 \\=====================//
  */
-//            |||  /api/session |||
+//Login       POST /api/session
 router.post('/', asyncHandler(async (req, res, next) => {
     //Get credentials from the request body
     const { credential, password } = req.body;
@@ -41,6 +41,15 @@ router.post('/', asyncHandler(async (req, res, next) => {
         });
     }),
 );
+
+//Logout      DELETE /api/session
+router.delete('/', (_req, res) => {
+        res.clearCookie('token');
+        return res.json({ message: 'success' });
+    }
+);
+
+
 
 
 /*
