@@ -1,3 +1,8 @@
+/*
+//=====================\\
+||INIT-----------------||
+\\=====================//
+ */
 const router = require('express').Router();
 
 
@@ -15,4 +20,9 @@ router.post('/test', function(req, res) {
 
 
 
+/*
+//=====================\\
+||EXPORTS--------------||
+\\=====================//
+ */
 module.exports = router;
