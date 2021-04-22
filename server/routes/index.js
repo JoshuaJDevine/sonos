@@ -17,9 +17,9 @@ router.use('/api', apiRouter);
 ||TEST ROUTES----------||
 \\=====================//
  */
-router.get('/hello/world', function(req, res) {
+router.get('/', function(req, res) {
     res.cookie('XSRF-TOKEN', req.csrfToken());
-    res.send('Hello World!');
+    res.send('Welcome to sonos!');
 });
 
 
