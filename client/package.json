@@ -55,5 +55,6 @@
     "eslint": "^7.24.0",
     "eslint-plugin-react": "^7.23.2",
     "redux-logger": "^3.0.6"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
