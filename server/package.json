@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "sequelize": "sequelize",
+    "sequelize-cli": "sequelize-cli",
+    "start": "per-env",
+    "start:development": "nodemon -r dotenv/config ./bin/www",
+    "start:production": "node ./bin/www"
   },
   "keywords": [],
   "author": "",
@@ -26,13 +30,6 @@
     "pg": "^8.6.0",
     "sequelize": "^5.22.4",
     "sequelize-cli": "^5.5.1"
-  },
-  "scripts": {
-    "sequelize": "sequelize",
-    "sequelize-cli": "sequelize-cli",
-    "start": "per-env",
-    "start:development": "nodemon -r dotenv/config ./bin/www",
-    "start:production": "node ./bin/www"
   },
   "devDependencies": {
     "dotenv-cli": "^4.0.0",

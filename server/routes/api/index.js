@@ -27,9 +27,9 @@ router.use('/users', usersRouter);
 \\=====================//
  */
 //Test POST route
-router.post('/test', function(req, res) {
-    res.json({ requestBody: req.body });
-});
+// router.post('/test', function(req, res) {
+//     res.json({ requestBody: req.body });
+// });
 
 //Imports to test auth flow
 // const asyncHandler = require('express-async-handler');
