@@ -1,0 +1,98 @@
+:root {
+  --background-color--main---light: #eaeaea;
+  --background-color--accent1---light: #b4b4b4;
+  --background-color--accent2---light: #444444;
+
+  --background-color--main---dark: #444444;
+  --background-color--accent1---dark: #ffffff;
+  --background-color--accent2---dark: #c1c1c1;
+
+  --p--main---light: #5a5a5a;
+  --p--main---dark: #c1c1c1;
+
+  --button--hoverBGcolor---light: #e2e2e2;
+  --button--hoverBGcolor---dark: #343434;
+  --button--borderColor---light: #444444;
+  --button--borderColor---dark: #444444;
+
+  --topnav--borderColor--light:#3e3e3e;
+  --topnav--borderColor--dark: #d9d9d9;
+
+}
+
+.App {
+  text-align: center;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+.App.Light {
+  background-color: var(--background-color--main---light);
+  color: var(--p--main---light);
+  -webkit-transition: all 2s linear;
+  -moz-transition: all 2s linear;
+  -o-transition: all 2s linear;
+  transition: all 2s linear;
+}
+.App.Dark {
+  background-color: var(--background-color--main---dark);
+  color: var(--p--main---dark);
+  -webkit-transition: all 2s linear;
+  -moz-transition: all 2s linear;
+  -o-transition: all 2s linear;
+  transition: all 2s linear;
+}
+
+.App Button {
+  font-family:'Montserrat', sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100%;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1;
+  font-size: 12px;
+  background-color : transparent;
+  padding: 10px;
+  outline: none;
+  border-radius: 0;
+  border-top: 0;
+  border-bottom: 0;
+  transition: all .33s ease;
+}
+
+.App.Light Button{
+  color: var(--p--main---light);
+  border-right: 1px solid var(--background-color--accent2---light);
+  border-left: 1px solid var(--background-color--accent2---light);
+}
+.App.Light Button:Hover{
+  background-color: var(--button--hoverBGcolor---light);
+
+}
+
+.App.Dark Button{
+  color: var(--p--main---dark);
+  border-right: 1px solid var(--background-color--accent2---dark);
+  border-left: 1px solid var(--background-color--accent2---dark);
+}
+.App.Dark Button:Hover{
+  background-color: var(--button--hoverBGcolor---dark);
+}
+
+#hamburgerMenu{
+  width: 100px;
+
+}
+
+
+
+/* Style the search field */
+.searchBar {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  height: 80%;
+  width: 80%;
+  background: #f1f1f1;
+}
