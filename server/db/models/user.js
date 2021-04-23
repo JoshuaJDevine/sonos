@@ -48,7 +48,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = function(models) {
-    // associations can be defined here
+    // User.hasMany(models.comment, {foreignKey: 'userId'});
+    // User.hasMany(models.like, {foreignKey: 'userId'});
+    User.hasMany(models.Track, {foreignKey: 'userId'});
+    // User.belongsToMany(models.playlist, {through: "playlist_users"})
   };
 
   //Auth flow

@@ -4,6 +4,8 @@
 \\=====================//
  */
 //Import packages
+
+const { User, Playlist, Track  } = require('./db/models');
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -21,6 +23,7 @@ const { ValidationError } = require('sequelize');
 
 //Init app
 const app = express();
+
 
 
 
@@ -57,6 +60,61 @@ app.use(
         },
     })
 );
+
+
+
+
+
+//SEQUELIZE TESTS
+async function lookupUser(userId) {
+    const user = await User.findByPk(userId, {
+        include: Track,
+    });
+    // const user = await User.findByPk(userId);
+
+    // Track.create({
+    //     userId: 1,
+    //     url: 'http:/aws.mytrack.com'
+    // }).then((res) => {
+    //     console.log(res);
+    // }).catch((err) => {
+    //     console.log(err)
+    // })
+    //test
+    //
+    // Playlist.create({
+    //     name: 'test',
+    //     isPrivate: false
+    // }).then((res) => {
+    //     console.log(res);
+    // }).catch((err) => {
+    //     console.log(err)
+    // })
+    //test
+
+
+    return user;
+    //test
+
+}
+
+
+
+
+
+lookupUser(1).then((res) => {
+    console.log('=========sequelize test===========')
+    console.log(res.dataValues.username, ' is associated with', res.Tracks.length, 'tracks');
+    console.log('This is a great success!');
+    console.log('the tracks are: ')
+    res.Tracks.forEach((el) => {console.log(el.dataValues.url)})
+    //Test;
+    //Test
+});
+
+
+
+
 
 //Routers
 app.use(routes);
