@@ -1,4 +1,4 @@
-.BODY__ELEMENTS___SIGNUPFORM{
+.BODY__ELEMENTS___LOGINFORM{
     display: flex;
     min-height: 200px;
 }
@@ -8,15 +8,15 @@
     margin-bottom: 20px;
 }
 
-.BODY__ELEMENTS___SIGNUPFORM form {
+.BODY__ELEMENTS___LOGINFORM form {
     display: grid;
     place-items: center;
     margin: auto;
 }
-.BODY__ELEMENTS___SIGNUPFORM form label {
+.BODY__ELEMENTS___LOGINFORM form label {
     margin-bottom: 3px;
 }
-.BODY__ELEMENTS___SIGNUPFORM form input {
+.BODY__ELEMENTS___LOGINFORM form input {
     border: 1px solid;
     border-radius: 5px;
     padding: 8px;

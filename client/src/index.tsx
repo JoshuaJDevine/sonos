@@ -22,6 +22,8 @@ import * as sessionActions from './store/session';
 import { Provider } from 'react-redux';
 import configureStore from './store';
 const store = configureStore();
+
+//Don't expose store in production
 if (process.env.NODE_ENV !== 'production') {
     restoreCSRF();
 
@@ -33,11 +35,6 @@ if (process.env.NODE_ENV !== 'production') {
 //Extras
 import reportWebVitals from './reportWebVitals';
 
-//Don't expose store in production
-if (process.env.NODE_ENV !== 'production') {
-    // @ts-ignore
-    window.store = store;
-}
 
 //Components
 import App from './App';

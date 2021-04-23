@@ -14,9 +14,7 @@ export default function BODY__ELEMENTS___LOGINFORM() {
 
     if (sessionUser) {
         console.log("User", sessionUser, " is logged in. Redirecting to /home")
-        return (
-            <Redirect to="home" />
-        );
+        return <Redirect to='/home' />
     }
 
 
@@ -48,7 +46,6 @@ export default function BODY__ELEMENTS___LOGINFORM() {
                 />
                 <label htmlFor='password'>
                     Password
-
                 </label>
                 <input
                     id='password'

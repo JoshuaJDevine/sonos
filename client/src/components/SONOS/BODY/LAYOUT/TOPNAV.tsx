@@ -1,15 +1,18 @@
 // @ts-nocheck
 import React, {useEffect, useState} from "react";
-import { Link } from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 
 
 import {Theme, useTheme} from '../../../../context/ThemeContext';
 import './TOPNAV.css'
-
+import * as sessionActions from "../../../../store/session";
+import {useDispatch, useSelector} from "react-redux";
 
 
 export default function BODY__CONTENT___TOPNAV(){
     const { theme, setTheme} = useTheme();
+    const sessionUser = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
 
 
 
@@ -43,15 +46,8 @@ export default function BODY__CONTENT___TOPNAV(){
             </button>
             <input className='SearchBar' type="text" placeholder="Search.." name="search" />
 
-            <Link to='/login'>
-                <button>
-                    Sign In
-                </button>
-            </Link>
+            {manageSessionButtons(sessionUser, dispatch)}
 
-            <button>
-                Create Account
-            </button>
             <button>
                 Upload
             </button>
@@ -62,3 +58,49 @@ export default function BODY__CONTENT___TOPNAV(){
     )
 }
 
+function manageSessionButtons(sessionUser, dispatch){
+    const handleLogout = function (){
+
+        console.log("logging out user");
+        dispatch(sessionActions.logout());
+        return <Redirect to='/home' />
+    }
+
+    console.log(sessionUser);
+
+    if (!sessionUser){
+        return (
+            <>
+                <Link to='/login'>
+                    <button>
+                        Log in
+                    </button>
+                </Link>
+
+                <Link to='/signup'>
+                    <button>
+                        Sign up
+                    </button>
+                </Link>
+            </>
+        )
+    }
+    else {
+        return (
+            <>
+                <img src='/img/musical-note_SM.png' alt='musicNote'/>
+                <Link to='/profile'>
+                    <button>
+                        Profile
+                    </button>
+                </Link>
+
+                <button
+                    onClick={handleLogout}
+                >
+                    Logout
+                </button>
+            </>
+        )
+    }
+}
