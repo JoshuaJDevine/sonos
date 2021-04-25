@@ -5,6 +5,8 @@
  */
 const express = require('express')
 const asyncHandler = require('express-async-handler');
+const {singlePublicFileUpload} = require("../../awsS3");
+const {singleMulterUpload} = require("../../awsS3");
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
 const { User } = require('../../db/models');
 const router = express.Router();
@@ -47,19 +49,49 @@ const validateSignup = [
 \\=====================//
  */
 //Logout     POST  /api/users
-router.post('/', validateSignup, asyncHandler(async (req, res) => {
-        const { email, password, username } = req.body;
-        const user = await User.signup({ email, username, password });
+// router.post('/', validateSignup, asyncHandler(async (req, res) => {
+//         const { email, password, username } = req.body;
+//         const user = await User.signup({ email, username, password });
+//
+//         await setTokenCookie(res, user);
+//
+//         return res.json({
+//             user,
+//         });
+//     }),
+// );
 
-        await setTokenCookie(res, user);
+
+//AWS UPLOAD
+router.post(
+    "/",
+    singleMulterUpload("image"),
+    validateSignup,
+    asyncHandler(async (req, res) => {
+        console.log("POSTING /")
+
+        const { email, password, username, image } = req.body;
+        // console.log(req.body);
+        // console.log(req.file);
+        const profileImageUrl = await singlePublicFileUpload(req.file);
+
+
+
+
+        const user = await User.signup({
+            username,
+            email,
+            password,
+            profileImageUrl,
+        });
+
+        setTokenCookie(res, user);
 
         return res.json({
             user,
         });
-    }),
+    })
 );
-
-
 
 
 /*

@@ -12,6 +12,11 @@
 .BODY__CONTENT___TOPNAV.Dark {
 }
 
+#userProfileImg{
+    width: 30px;
+    height: 30px;
+}
+
 #nav-logo{
     padding-right: 10px;
     width: 100px;

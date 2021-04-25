@@ -10,6 +10,7 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
     const sessionUser = useSelector(state => state.session.user);
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
+    const [image, setImage] = useState(null);
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
@@ -23,7 +24,13 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors([]);
-            return dispatch(sessionActions.signup({ email, username, password }))
+            return dispatch(sessionActions.signup({ email, username, password, image }))
+                .then(() => {
+                    setUsername("");
+                    setEmail("");
+                    setPassword("");
+                    setImage(null);
+                })
                 .catch(async (res) => {
                     console.log("res was", res);
                     const data = await res.json();
@@ -34,6 +41,11 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
             setErrors(['Passwords do not match']);
         }
     }
+
+    const updateFile = (e) => {
+        const file = e.target.files[0];
+        if (file) setImage(file);
+    };
 
     return (
         <div className='BODY__ELEMENTS___SIGNUPFORM'>
@@ -78,12 +90,15 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
                 </label>
                 <input
                     id='confirmPassword'
-                    name= 'password'
+                    name= 'confirmPassword'
                     type="password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                 />
+                <label htmlFor='imageUpload'>
+                </label>
+                <input type="file" id='imageUpload' name='imageUpload' onChange={updateFile} />
                 <button type="submit">Sign Up</button>
             </form>
         </div>

@@ -66,7 +66,9 @@ function manageSessionButtons(sessionUser, dispatch){
         return <Redirect to='/home' />
     }
 
-    console.log(sessionUser);
+    if (sessionUser){
+        console.log(sessionUser.profileImageUrl);
+    }
 
     if (!sessionUser){
         return (
@@ -88,7 +90,7 @@ function manageSessionButtons(sessionUser, dispatch){
     else {
         return (
             <>
-                <img src='/img/musical-note_SM.png' alt='musicNote'/>
+                <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>
                 <Link to='/profile'>
                     <button>
                         Profile

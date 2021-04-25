@@ -11,6 +11,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const csurf = require('csurf');
 const helmet = require('helmet');
+const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 
@@ -38,7 +39,8 @@ app.use(morgan('dev'));
 
 //Parsing Middleware
 app.use(cookieParser());
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Security Middleware
 if (!isProduction) {
@@ -74,7 +76,7 @@ app.use(
 
     // Track.create({
     //     userId: 1,
-    //     url: 'http:/aws.mytrack.com'
+    //     url: 'http:/aws.track.com'
     // }).then((res) => {
     //     console.log(res);
     // }).catch((err) => {
