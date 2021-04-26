@@ -44,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     scopes: {
       currentUser: {
-        attributes: { exclude: ['hashedPassword'] },
+        attributes: { exclude: ['hashedPassword']},
       },
       loginUser: {
         attributes: {},
@@ -92,12 +92,16 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
 
+    console.log("Found user");
+    const testUser = await User.findByPk(user.id, {
+      include: Track,
+    })
+
 
     if (user && user.validatePassword(password)) {
-      const theuser = await User.scope('currentUser').findByPk(user.id, {
+      return await User.scope('currentUser').findByPk(user.id, {
         include: Track,
-      });;
-      return theuser;
+      });
       // return queries.findUserTracks(user.id);
     }
   };

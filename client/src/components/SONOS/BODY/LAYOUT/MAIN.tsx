@@ -1,11 +1,26 @@
+// @ts-nocheck
 import BODY__CONTENT___LISTLARGE from "../ELEMENTS/LISTLARGE";
 import BODY__CONTENT___TABS from "../ELEMENTS/TABS";
 import BODY__CONTENT___CAROUSEL from "../ELEMENTS/CAROUSEL";
 import Waveform from "../ELEMENTS/WAVEFORM";
 import PlayList from "../ELEMENTS/PLAYLIST";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getUsersTracks} from "../../../../store/track";
 
 export default function BODY__CONTENT___MAIN(){
+    const dispatch = useDispatch();
+    const sessionUser = useSelector(state => state.session.user);
+    const [userTracks, setUserTracks] = useState([]);
+
+    useEffect(() => {
+        if (sessionUser){
+            console.log("SESSION USER IS:")
+            console.log(sessionUser.id);
+            dispatch(getUsersTracks(sessionUser.id))
+            //getUsersTracks
+        }
+    }, [userTracks])
 
 
     const tracks = [

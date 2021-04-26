@@ -6,11 +6,11 @@ UPLOAD_TRACK
 ==============================
  */
 //Type
-const STORE_TRACK = 'track/uploadTrack';
+const STORE_NEWTRACK = 'track/uploadNewTrack';
 //Action Creator
-const storeTrack = (track) => {
+const storeNewTrack = (track) => {
     return {
-        type: STORE_TRACK,
+        type: STORE_NEWTRACK,
         payload: track,
     }
 }
@@ -30,9 +30,46 @@ export const uploadNewTrack = (newTrackData) => async (dispatch) => {
         body: formData,
     });
     const serverRes = await res.json();
-    dispatch(storeTrack(serverRes.track))
+    dispatch(storeNewTrack(serverRes.track))
     return res;
 }
+
+
+
+/*
+==============================
+GET USERS TRACKS
+==============================
+ */
+//Type
+const STORE_USERTRACKS = 'track/storeUserTracks';
+//Action Creator
+const storeUserTracks = (tracks) => {
+    return {
+        type: STORE_USERTRACKS,
+        payload: tracks,
+    }
+}
+//Thunk Creator                                                     //Thunk
+export const getUsersTracks = (userData) => async (dispatch) => {
+    const res = await csrfFetch(`/api/users/${userData}/tracks`);
+
+    // const Tracks = res();
+    // console.log(Tracks);
+    // if (res){
+    //     const serverRes = await res.json();
+    //     dispatch(getTracks(serverRes))
+    //     return res;
+    // }
+    const serverRes = await res.json();
+    // console.log(serverRes.User.Tracks);
+    dispatch(storeUserTracks(serverRes.User.Tracks))
+    return res;
+
+}
+
+
+
 
 /*
 ==============================
@@ -43,8 +80,10 @@ const initialState = { track: null };
 const trackReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
-        case STORE_TRACK:
-            return { ...state, track: action.payload };
+        case STORE_NEWTRACK:
+            return { ...state, newTrack: action.payload };
+        case STORE_USERTRACKS:
+            return { ...state, userTracks: action.payload}
         // case REMOVE_USER:
         //     newState = Object.assign({}, state);
         //     newState.user = null;

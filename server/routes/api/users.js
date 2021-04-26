@@ -5,6 +5,7 @@
  */
 const express = require('express')
 const asyncHandler = require('express-async-handler');
+const queries = require("../../utils/queries");
 const {singlePublicFileUpload} = require("../../awsS3");
 const {singleMulterUpload} = require("../../awsS3");
 const { setTokenCookie, requireAuth } = require('../../utils/auth');
@@ -90,6 +91,21 @@ router.post(
         });
     })
 );
+
+//api/users/:id/tracks
+router.get('/:userId/tracks', asyncHandler(async (req, res) => {
+    console.log(req.params);
+
+    const User = await queries.findUserTracks(13);
+
+    // console.log(User.Tracks);
+
+    return res.json({
+        User,
+    });
+
+}));
+
 
 
 /*

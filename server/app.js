@@ -16,14 +16,14 @@ const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 const queries = require('./utils/queries.js');
 
-console.log(queries);
+// console.log(queries);
 // console.log(queries.findUserbyID(13).then((res) => {
 //     console.log(res);
 // }));
 //test
-queries.findUserTracks(13).then((res) => {
-    res.Tracks.forEach((el) => {console.log(el.dataValues.url)});
-});
+// queries.findUserTracks(13).then((res) => {
+//     res.Tracks.forEach((el) => {console.log(el.dataValues.url)});
+// });
 
 //Determine environment
 const { environment } = require('./config');

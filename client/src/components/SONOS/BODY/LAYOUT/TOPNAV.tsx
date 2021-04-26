@@ -69,9 +69,9 @@ function manageSessionButtons(sessionUser, dispatch){
         return <Redirect to='/home' />
     }
 
-    if (sessionUser){
-        console.log(sessionUser.profileImageUrl);
-    }
+    // if (sessionUser){
+    //     console.log(sessionUser.profileImageUrl);
+    // }
 
     if (!sessionUser){
         return (
