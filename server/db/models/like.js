@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     trackId: DataTypes.INTEGER
   }, {});
   Like.associate = function(models) {
-    // Like.belongsTo(models.user, { foreignKey: 'userId'})
-    // Like.belongsTo(models.track, { foreignKey: 'trackId'})
+    Like.belongsTo(models.User, { foreignKey: 'userId'})
+    Like.belongsTo(models.Track, { foreignKey: 'trackId'})
   };
   return Like;
 };

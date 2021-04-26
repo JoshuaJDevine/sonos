@@ -14,6 +14,15 @@ const helmet = require('helmet');
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const routes = require('./routes');
+const queries = require('./utils/queries.js');
+
+// console.log(queries);
+// console.log(queries.findUserbyID(1).then((res) => {
+//     console.log(res);
+// }));
+// console.log(queries.findUserTracks(1).then((res) => {
+//     console.log(res);
+// }))
 
 //Determine environment
 const { environment } = require('./config');
@@ -62,57 +71,6 @@ app.use(
         },
     })
 );
-
-
-
-
-
-//SEQUELIZE TESTS
-// async function lookupUser(userId) {
-//     const user = await User.findByPk(userId, {
-//         include: Track,
-//     });
-    // const user = await User.findByPk(userId);
-
-    // Track.create({
-    //     userId: 1,
-    //     url: 'http:/aws.track.com'
-    // }).then((res) => {
-    //     console.log(res);
-    // }).catch((err) => {
-    //     console.log(err)
-    // })
-    //test
-    //
-    // Playlist.create({
-    //     name: 'test',
-    //     isPrivate: false
-    // }).then((res) => {
-    //     console.log(res);
-    // }).catch((err) => {
-    //     console.log(err)
-    // })
-    //test
-
-    //
-    // return user;
-    //test
-//
-// }
-
-// lookupUser(1).then((res) => {
-//     console.log('=========sequelize test===========')
-//     console.log(res.dataValues.username, ' is associated with', res.Tracks.length, 'tracks');
-//     console.log('This is a great success!');
-//     console.log('the tracks are: ')
-//     res.Tracks.forEach((el) => {console.log(el.dataValues.url)})
-//     //Test;
-//     //Test
-// });
-
-
-
-
 
 //Routers
 app.use(routes);

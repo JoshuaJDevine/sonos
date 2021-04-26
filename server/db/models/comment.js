@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT
   }, {});
   Comment.associate = function(models) {
-    // Comment.belongsTo(models.user, { foreignKey: 'userId'})
-    // Comment.belongsTo(models.track, { foreignKey: 'trackId'})
+    Comment.belongsTo(models.User, { foreignKey: 'userId'})
+    Comment.belongsTo(models.Track, { foreignKey: 'trackId'})
   };
   return Comment;
 };

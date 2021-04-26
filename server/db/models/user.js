@@ -52,10 +52,10 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.associate = function(models) {
-    // User.hasMany(models.comment, {foreignKey: 'userId'});
-    // User.hasMany(models.like, {foreignKey: 'userId'});
+    User.hasMany(models.Comment, {foreignKey: 'userId'});
+    User.hasMany(models.Like, {foreignKey: 'userId'});
     User.hasMany(models.Track, {foreignKey: 'userId'});
-    // User.belongsToMany(models.playlist, {through: "playlist_users"})
+    User.belongsToMany(models.Playlist, {through: "playlist_users"})
   };
 
   //Auth flow
@@ -88,17 +88,6 @@ module.exports = (sequelize, DataTypes) => {
   };
 
   User.signup = async function ({ username, email, password, profileImageUrl }) {
-    console.log("==============================================");
-    console.log("==============================================");
-    console.log("==============================================");
-    console.log("==============================================");
-    console.log("==============================================");
-    console.log("==============================================");
-    console.log("==============================================");
-    console.log("==============================================");
-    console.log(profileImageUrl);
-
-
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({
       username,

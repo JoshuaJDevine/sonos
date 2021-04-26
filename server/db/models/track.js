@@ -6,9 +6,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Track.associate = function(models) {
     Track.belongsTo(models.User, { foreignKey: "userId"})
-    // Track.hasMany(models.track, { foreignKey: 'trackId'})
-    // Track.hasMany(models.comment, { foreignKey: 'trackId'})
-    // Track.belongsToMany(models.playlist, {through: "playlist_tracks"})
+    Track.hasMany(models.Like, { foreignKey: 'trackId'})
+    Track.hasMany(models.Comment, { foreignKey: 'trackId'})
+    Track.belongsToMany(models.Playlist, {through: "playlist_tracks"})
   };
   return Track;
 };

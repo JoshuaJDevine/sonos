@@ -5,8 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     isPrivate: DataTypes.BOOLEAN
   }, {});
   Playlist.associate = function(models) {
-    // Playlist.belongsToMany(models.user, {through: "playlist_users", foreignKey: 'playlist_id', otherKey: 'user_id'})
-    // Playlist.belongsToMany(models.track, {through: "playlist_tracks"})
+    Playlist.belongsToMany(models.User, {through: "playlist_users"})
+    Playlist.belongsToMany(models.Track, {through: "playlist_tracks"})
   };
   return Playlist;
 };
