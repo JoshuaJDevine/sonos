@@ -9,5 +9,20 @@ module.exports = (sequelize, DataTypes) => {
     Comment.belongsTo(models.User, { foreignKey: 'userId'})
     Comment.belongsTo(models.Track, { foreignKey: 'trackId'})
   };
+
+  Comment.uploadNewComment = async function ( content, userId, trackId ) {
+    console.log("==========CREATING COMMENT FROM MODEL");
+    console.log( content, userId, trackId);
+
+    const comment = await Comment.create({
+      content,
+      userId,
+      trackId,
+    });
+    return comment;
+  };
+
   return Comment;
 };
+
+

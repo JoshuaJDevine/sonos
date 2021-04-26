@@ -7,7 +7,6 @@ const express = require('express')
 const asyncHandler = require('express-async-handler');
 const {singlePublicFileUpload} = require("../../awsS3");
 const {singleMulterUpload} = require("../../awsS3");
-const { setTokenCookie, restoreUser } = require('../../utils/auth');
 const { Track } = require('../../db/models');
 const router = express.Router();
 const { check } = require('express-validator');
@@ -46,28 +45,23 @@ router.post(
     singleMulterUpload("mp3"),
     // validateTrack,
     asyncHandler(async (req, res) => {
-
-
         const { trackName, userId } = req.body;
         const newTrackUrl = await singlePublicFileUpload(req.file);
 
-        console.log("====================")
-        console.log("====================")
-        console.log("====================")
-        console.log("====================")
-        console.log("====================")
-        console.log("====================")
-        console.log("Server received the request to POST to /api/track")
-        console.log("AWS responded with the URL", newTrackUrl);
-
+        // console.log("====================")
+        // console.log("====================")
+        // console.log("====================")
+        // console.log("====================")
+        // console.log("====================")
+        // console.log("====================")
+        // console.log("Server received the request to POST to /api/track")
+        // console.log("AWS responded with the URL", newTrackUrl);
 
         const newTrack = await Track.uploadNewTrack({
             url: newTrackUrl,
             trackName,
             userId,
         });
-
-        //setTokenCookie(res, user);
 
         return res.json({
             newTrack,

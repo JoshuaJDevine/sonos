@@ -7,6 +7,7 @@ const router = require('express').Router();
 const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const  trackRouter = require('./track.js')
+const commentRouter = require('./comments')
 
 //todo add routes for track crud
 
@@ -19,6 +20,7 @@ const  trackRouter = require('./track.js')
 router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/track', trackRouter);
+router.use('/comment', commentRouter)
 
 
 
