@@ -1,3 +1,6 @@
+// @ts-ignore
+import './WAVEFORM.css'
+
 import React, { useEffect, useRef, useState } from "react";
 
 // @ts-ignore
@@ -20,6 +23,10 @@ const formWaveSurferOptions = ref => ({
     xhr: "no-cors"
 });
 
+
+
+
+
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 export default function Waveform({ url }) {
@@ -27,6 +34,7 @@ export default function Waveform({ url }) {
     const wavesurfer = useRef(null);
     const [playing, setPlay] = useState(false);
     const [volume, setVolume] = useState(0.5);
+    const [comment, setComment] = useState("")
 
     // create new WaveSurfer instance
     // On component mount and when url changes
@@ -80,6 +88,34 @@ export default function Waveform({ url }) {
         }
     };
 
+    const handleComment = e => {
+        console.log("//-------TODO-------//")
+        console.log("//------------------//")
+        console.log("IMPLEMENT COMMENTS")
+        console.log("//------------------//")
+        console.log("//------------------//")
+        const { target } = e;
+        const newValue = target.value;
+
+        setComment(newValue);
+    }
+
+    const handleLike = e => {
+        console.log("//-------TODO-------//")
+        console.log("//------------------//")
+        console.log("IMPLEMENT LIKES")
+        console.log("//------------------//")
+        console.log("//------------------//")
+    }
+
+
+
+
+
+
+
+
+
     return (
         <div>
             <div id="waveform" ref={waveformRef} />
@@ -98,7 +134,60 @@ export default function Waveform({ url }) {
                     defaultValue={volume}
                 />
                 <label htmlFor="volume">Volume</label>
+                <button onClick={handleLike}>{"Like"}</button>
+                <label htmlFor="volume">Leave a comment    </label>
+                <input
+                    maxLength="20" //TODO style and UX
+                    type="text"
+                    id="myComment"
+                    name="myComment"
+                    onChange={handleComment}
+                    value={comment}
+                />
             </div>
+            <GenerateUserComment/>
         </div>
     );
+}
+
+
+
+const GenerateUserComment = function(users) {
+    users = null;
+    if (users) {
+        users.map(function (data) {
+            return (
+                <div className='SONOS__COMMENTBOX___COMMENT' key='data.id'>
+                    <img id={data.userName}
+                         src={data.profileImageUrl != null ? data.profileImageUrl : '/img/musical-note_SM.png'}
+                         alt='musicNote'/>
+                    <p>data.comment</p>
+                </div>
+            )
+        })
+    }
+    else {
+        return (
+            <>
+                <div className='SONOS__COMMENTBOX___COMMENT'>
+                    <img id="Fake Comment 1"
+                         src={'/img/musical-note_SM.png'}
+                         alt='musicNote'/>
+                    <p>Fake Comment 1</p>
+                </div>
+                <div className='SONOS__COMMENTBOX___COMMENT'>
+                    <img id="Fake Comment 2"
+                         src={'/img/musical-note_SM.png'}
+                         alt='musicNote'/>
+                    <p>Fake Comment 2</p>
+                </div>
+                <div className='SONOS__COMMENTBOX___COMMENT'>
+                    <img id="Fake Comment 3"
+                         src={'/img/musical-note_SM.png'}
+                         alt='musicNote'/>
+                    <p>Fake Comment 3</p>
+                </div>
+            </>
+        )
+    }
 }

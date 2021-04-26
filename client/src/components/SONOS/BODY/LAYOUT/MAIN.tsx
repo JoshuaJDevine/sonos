@@ -17,12 +17,9 @@ export default function BODY__CONTENT___MAIN(){
 
     useEffect(() => {
         if (sessionUser){
-            console.log("SESSION USER IS:")
-            console.log(sessionUser.id);
             dispatch(getUsersTracks(sessionUser.id))
-            //getUsersTracks
         }
-    }, [ ])
+    }, [dispatch])
 
     useEffect(() => {
         console.log(userTrackList);
@@ -67,12 +64,13 @@ export default function BODY__CONTENT___MAIN(){
         <div className='BODY__CONTENT___MAIN'>
             <h3>BODY__CONTENT___MAIN</h3>
             <div>
-                <Waveform url={selectedTrack.url} />
                 <PlayList
                     tracks={testUserPlayList.length > 0 ? testUserPlayList : testTracks}
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                 />
+                <Waveform url={selectedTrack.url} />
+
             </div>
             <BODY__CONTENT___LISTLARGE />
             <BODY__CONTENT___TABS />

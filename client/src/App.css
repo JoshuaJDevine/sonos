@@ -78,9 +78,14 @@
 
 #hamburgerMenu{
   width: 100px;
-
 }
 
+.App.Light.SONOS__COMMENTBOX___COMMENT {
+  background-color: #3e3e3e;
+}
+.App.Dark.SONOS__COMMENTBOX___COMMENT {
+  background-color: white;
+}
 
 
 /* Style the search field */
