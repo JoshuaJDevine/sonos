@@ -68,8 +68,6 @@ router.post(
     singleMulterUpload("image"),
     validateSignup,
     asyncHandler(async (req, res) => {
-        console.log("POSTING /")
-
         const { email, password, username, image } = req.body;
         // console.log(req.body);
         // console.log(req.file);

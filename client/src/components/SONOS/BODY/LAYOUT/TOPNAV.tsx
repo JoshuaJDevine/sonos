@@ -48,9 +48,12 @@ export default function BODY__CONTENT___TOPNAV(){
 
             {manageSessionButtons(sessionUser, dispatch)}
 
-            <button>
-                Upload
-            </button>
+            <Link to='/upload'>
+                <button>
+                    Upload
+                </button>
+            </Link>
+
             <button id={'hamburgerMenu'}>
                 ...
             </button>

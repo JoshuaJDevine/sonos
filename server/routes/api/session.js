@@ -46,6 +46,8 @@ router.post('/', validateLogin, asyncHandler(async (req, res, next) => {
     //Check for user
     const user = await User.login({ credential, password });
 
+
+
         //If no user then generate error
         if (!user) {
             const err = new Error('Login failed');

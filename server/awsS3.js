@@ -14,7 +14,6 @@ const s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 // --------------------------- Public UPLOAD ------------------------
 
 const singlePublicFileUpload = async (file) => {
-    console.log(file);
     if (file){
         const { originalname, mimetype, buffer } = await file;
         const path = require("path");
@@ -33,6 +32,7 @@ const singlePublicFileUpload = async (file) => {
         console.log("===========----------==============")
         console.log("===========----------==============")
         console.log("===========----------==============")
+        console.log("AWS responded with:")
         console.log(result.Location)
         // save the name of the file in your bucket as the key in your database to retrieve for later
         return result.Location;

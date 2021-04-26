@@ -1,0 +1,25 @@
+.BODY__ELEMENTS___UPLOADFORM{
+    display: flex;
+    min-height: 200px;
+}
+
+.SONOS__ERRORS {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.BODY__ELEMENTS___UPLOADFORM form {
+    display: grid;
+    place-items: center;
+    margin: auto;
+}
+.BODY__ELEMENTS___UPLOADFORM form label {
+    margin-bottom: 3px;
+}
+.BODY__ELEMENTS___UPLOADFORM form input {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 8px;
+    margin-bottom: 30px;
+}
+

@@ -7,6 +7,7 @@ import BODY__CONTENT from "./BODY/CONTENT";
 import BODY__SPLASH from "./BODY/SPLASH";
 import BODY__LOGIN from "./BODY/LOGIN";
 import BODY__SIGNUP from "./BODY/SIGNUP";
+import BODY__UPLOAD from "./BODY/UPLOAD";
 
 
 export default function BODY(){
@@ -14,18 +15,25 @@ export default function BODY(){
     return (
         <div className='BODY'>
             <Switch>
-                <Route path='/home'>
+                <Route exact path='/home'>
                     <BODY__CONTENT />
                 </Route>
-                <Route path='/login'>
+                <Route exact path='/login'>
                     <BODY__LOGIN />
                 </Route>
-                <Route path='/signup'>
+                <Route exact path='/signup'>
                     <BODY__SIGNUP />
                 </Route>
-                <Route path='/'>
+                <Route exact path='/upload'>
+                    <BODY__UPLOAD />
+                </Route>
+                <Route exact path='/'>
                     <BODY__SPLASH />
                 </Route>
+                <Route>
+                    <p>ERROR. Page Not Found</p>
+                </Route>
+
             </Switch>
         </div>
     )

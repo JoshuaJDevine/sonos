@@ -17,6 +17,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.TEXT
       },
+      trackName: {
+        allowNull: false,
+        type: Sequelize.TEXT
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

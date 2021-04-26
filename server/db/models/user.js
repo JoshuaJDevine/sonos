@@ -1,6 +1,7 @@
 'use strict';
 const { Validator } = require('sequelize');
 const bcrypt = require('bcryptjs');
+const { Track } = require('../models');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -74,6 +75,14 @@ module.exports = (sequelize, DataTypes) => {
 
   User.login = async function ({ credential, password }) {
     const { Op } = require('sequelize');
+    // const user = await User.scope('loginUser').findOne({
+    //   where: {
+    //     [Op.or]: {
+    //       username: credential,
+    //       email: credential,
+    //     },
+    //   },
+    // });
     const user = await User.scope('loginUser').findOne({
       where: {
         [Op.or]: {
@@ -82,8 +91,14 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
     });
+
+
     if (user && user.validatePassword(password)) {
-      return await User.scope('currentUser').findByPk(user.id);
+      const theuser = await User.scope('currentUser').findByPk(user.id, {
+        include: Track,
+      });;
+      return theuser;
+      // return queries.findUserTracks(user.id);
     }
   };
 

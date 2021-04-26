@@ -25,6 +25,10 @@ export const login = (user) => async (dispatch) => {
         }),
     });
     const data = await response.json();
+
+    console.log("THE USER IS")
+    console.log(data);
+
     dispatch(storeUser(data.user));
     return response;
 };
@@ -37,7 +41,6 @@ export const restoreUser = () => async dispatch => {
 };
 //Thunk Creator                                            //Thunk
 export const signup = (newUserData) => async (dispatch) => {
-    // console.log(newUserData);
     const {email, password, username, image, images} = newUserData;
     const formData = new FormData();
     formData.append("username", username);
@@ -62,7 +65,6 @@ export const signup = (newUserData) => async (dispatch) => {
         },
         body: formData,
     });
-    //TEST
     const serverRes = await res.json();
     console.log("The server responded with ", serverRes);
     dispatch(storeUser(serverRes.user));
