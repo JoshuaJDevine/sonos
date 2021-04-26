@@ -16,7 +16,8 @@ const formWaveSurferOptions = ref => ({
     // If true, normalize by the maximum peak instead of 1.0.
     normalize: true,
     // Use the PeakCache to improve rendering speed of large waveforms.
-    partialRender: true
+    partialRender: true,
+    xhr: "no-cors"
 });
 
 // @ts-ignore

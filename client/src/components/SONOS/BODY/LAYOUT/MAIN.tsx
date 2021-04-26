@@ -11,7 +11,9 @@ import {getUsersTracks} from "../../../../store/track";
 export default function BODY__CONTENT___MAIN(){
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    const userTrackList = useSelector(state => state.tracks.userTracks);
     const [userTracks, setUserTracks] = useState([]);
+    const [testUserPlayList, setTestUserPlayList] = useState([])
 
     useEffect(() => {
         if (sessionUser){
@@ -20,10 +22,28 @@ export default function BODY__CONTENT___MAIN(){
             dispatch(getUsersTracks(sessionUser.id))
             //getUsersTracks
         }
-    }, [userTracks])
+    }, [ ])
+
+    useEffect(() => {
+        console.log(userTrackList);
+        if (userTrackList){
+            const newPlaylist = []
+            console.log(userTrackList.length);
+            userTrackList.forEach((track, index) => {
+                newPlaylist.push({
+                    id: index,
+                    title: track.trackName,
+                    url: track.url
+                })
+                console.log(track.url);
+            })
+            setTestUserPlayList(newPlaylist);
+        }
+    }, [userTrackList])
 
 
-    const tracks = [
+
+    const testTracks = [
         {
             id: 0,
             title: "Deinde",
@@ -35,7 +55,10 @@ export default function BODY__CONTENT___MAIN(){
             url: "/audio/hearth.mp3"
         }
     ];
-    const [selectedTrack, setSelectedTrack] = useState(tracks[0]);
+
+    console.log(testUserPlayList);
+
+    const [selectedTrack, setSelectedTrack] = useState(testTracks[0]);
 
 
 
@@ -46,7 +69,7 @@ export default function BODY__CONTENT___MAIN(){
             <div>
                 <Waveform url={selectedTrack.url} />
                 <PlayList
-                    tracks={tracks}
+                    tracks={testUserPlayList.length > 0 ? testUserPlayList : testTracks}
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                 />
