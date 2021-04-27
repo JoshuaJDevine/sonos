@@ -1,5 +1,7 @@
 const { User, Track, Like, Comment, Playlist } = require('../db/models');
 const queries = {};
+const { Op } = require('sequelize');
+
 
 //SEQUELIZE TESTS
 queries.findUserbyID = async function findUserbyID(userId) {
@@ -33,7 +35,8 @@ queries.findTrackComments = async function findTrackComments(trackId){
                 { model : Comment ,
                     include: {
                         model : User
-                    }
+                    },
+                    where: {trackId: trackId}
                 }
             ]}
     );

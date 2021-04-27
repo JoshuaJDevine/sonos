@@ -20,8 +20,8 @@ const storeTrackComments = (comments) => {
 export const getTracksComments = (trackId) => async (dispatch) => {
     const res = await csrfFetch(`/api/comment/${trackId}/comments`);
     const serverRes = await res.json();
-    console.log(serverRes);
-    console.log(res);
+    // console.log(serverRes);
+    // console.log(res);
     if (serverRes.comments != undefined){
         dispatch(storeTrackComments(serverRes.comments.Comments))
     }

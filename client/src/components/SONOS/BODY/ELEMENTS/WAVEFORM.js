@@ -1,4 +1,5 @@
 // @ts-nocheck
+/* eslint-disable react/prop-types */
 
 import './WAVEFORM.css'
 
@@ -8,12 +9,10 @@ import React, { useEffect, useRef, useState } from "react";
 import WaveSurfer from "../../../../plugins/wavesurfer.js";
 import csrfFetch from "../../../../store/csrf";
 import {useDispatch, useSelector} from "react-redux";
-import csrf from "../../../../store/csrf";
 import {getTracksComments} from "../../../../store/comments";
 
 // @ts-ignore
 const formWaveSurferOptions = ref => ({
-
     container: ref,
     waveColor: "#787878",
     progressColor: "OrangeRed",
@@ -31,25 +30,21 @@ const formWaveSurferOptions = ref => ({
 
 
 
-
-
-// @ts-ignore
-// eslint-disable-next-line react/prop-types
 export default function Waveform({ url, trackId }) {
     const dispatch = useDispatch();
-
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);
     const [playing, setPlay] = useState(false);
     const [volume, setVolume] = useState(0.5);
     const [comment, setComment] = useState("")
     const [currentTrackId, setCurrentTrackId] = useState(null);
-    const [allComments, setAllComments]= useState([])
     const sessionUser = useSelector(state => state.session.user);
+    const trackComments = useSelector(state => state.comments.trackComments)
+
 
 
     // create new WaveSurfer instance
-    // On component mount and when url changes
+    // On component mount and when trackURL changes
     useEffect(() => {
         setPlay(false);
 
@@ -59,49 +54,56 @@ export default function Waveform({ url, trackId }) {
         console.log("Setting trackId to", trackId);
         setCurrentTrackId(trackId);
 
-
-        //Get comments for trackId here
-        // const comments = await csrf(`/api/comment/${trackId}/comments`)
-        dispatch(getTracksComments(trackId));
-
         wavesurfer.current = WaveSurfer.create(options);
 
-
-        // @ts-ignore
         wavesurfer.current.load(url);
 
-        // @ts-ignore
         wavesurfer.current.on("ready", function() {
             // https://wavesurfer-js.org/docs/methods.html
             // make sure object stillavailable when file loaded
             if (wavesurfer.current) {
-                // @ts-ignore
                 wavesurfer.current.setVolume(volume);
                 setVolume(volume);
+                dispatch(getTracksComments(trackId));
+                generateComments();
             }
         });
 
         // Removes events, elements and disconnects Web Audio nodes.
         // when component unmount
-        // @ts-ignore
-        return () => wavesurfer.current.destroy();
+        return () => {
+            console.log("===========Cleaning up")
+            wavesurfer.current.destroy();
+        }
+
     }, [url]);
+
+    const submitComment = () => {
+        const content = comment
+        const userId = sessionUser.id;
+        const trackId = currentTrackId;
+
+        csrfFetch('/api/comment/', {
+            method: 'POST',
+            body: JSON.stringify({ content, userId, trackId })
+        }).then(res => res.json()).then(data => console.log(data));
+
+    }
+
+
 
 
     const handlePlayPause = () => {
         setPlay(!playing);
-        // @ts-ignore
         wavesurfer.current.playPause();
     };
 
-    // @ts-ignore
     const onVolumeChange = e => {
         const { target } = e;
         const newVolume = +target.value;
 
         if (newVolume) {
             setVolume(newVolume);
-            // @ts-ignore
             wavesurfer.current.setVolume(newVolume || 1);
         }
     };
@@ -112,19 +114,7 @@ export default function Waveform({ url, trackId }) {
         setComment(newValue);
     }
 
-    const submitComment = () => {
-        const content = comment
-        const userId = sessionUser.id;
-        const trackId = currentTrackId;
 
-        console.log("===========WAVEFORM SENDING COMMENT")
-        console.log(content, userId, trackId)
-
-        csrfFetch('/api/comment/', {
-            method: 'POST',
-            body: JSON.stringify({ content, userId, trackId })
-        }).then(res => res.json()).then(data => console.log(data));
-    }
 
     const handleLike = e => {
         console.log("//-------TODO-------//")
@@ -134,12 +124,35 @@ export default function Waveform({ url, trackId }) {
         console.log("//------------------//")
     }
 
+    const generateComments = function () {
+        // console.log("===========Generating Comments")
+        // console.log(trackComments);
 
+        if (trackComments != null){
+            let generateAllCommenrs = trackComments.map((comment) =>
+                <div className='SONOS__COMMENTBOX___COMMENT' key={comment.id}>
+                    <img id={comment.userId}
+                         src={comment.User.profileImageUrl != null ? comment.User.profileImageUrl : '/img/musical-note_SM.png'}
+                         alt='userIcon'/>
+                    <p>{comment.content}</p>
+                </div>
+            );
 
-
-
-
-
+            return (
+                generateAllCommenrs
+            )
+        }
+        else {
+            return(
+                <div className='SONOS__COMMENTBOX___COMMENT' key='data.id'>
+                    <img id={1}
+                         src={'/img/musical-note_SM.png'}
+                         alt='userIcon'/>
+                    <p>No Comments</p>
+                </div>
+            )
+        }
+    }
 
 
     return (
@@ -172,49 +185,54 @@ export default function Waveform({ url, trackId }) {
                 />
                 <button onClick={submitComment}>{"COMMENT"}</button>
             </div>
-            <GenerateUserComment/>
+            <div className='commentswrapper'>{generateComments()}</div>
         </div>
     );
 }
-
-
-
-const GenerateUserComment = function(users) {
-    users = null;
-    if (users) {
-        users.map(function (data) {
-            return (
-                <div className='SONOS__COMMENTBOX___COMMENT' key='data.id'>
-                    <img id={data.userName}
-                         src={data.profileImageUrl != null ? data.profileImageUrl : '/img/musical-note_SM.png'}
-                         alt='musicNote'/>
-                    <p>data.comment</p>
-                </div>
-            )
-        })
-    }
-    else {
-        return (
-            <>
-                <div className='SONOS__COMMENTBOX___COMMENT'>
-                    <img id="Fake Comment 1"
-                         src={'/img/musical-note_SM.png'}
-                         alt='musicNote'/>
-                    <p>Fake Comment 1</p>
-                </div>
-                <div className='SONOS__COMMENTBOX___COMMENT'>
-                    <img id="Fake Comment 2"
-                         src={'/img/musical-note_SM.png'}
-                         alt='musicNote'/>
-                    <p>Fake Comment 2</p>
-                </div>
-                <div className='SONOS__COMMENTBOX___COMMENT'>
-                    <img id="Fake Comment 3"
-                         src={'/img/musical-note_SM.png'}
-                         alt='musicNote'/>
-                    <p>Fake Comment 3</p>
-                </div>
-            </>
-        )
-    }
-}
+//
+//
+//
+// const GenerateUserComment = function() {
+//     const trackComments = useSelector(state => state.comments.trackComments)
+//     let boo =false;
+//     if (trackComments){
+//
+//         trackComments.map(function (d) {console.log(d)});
+//     }
+//     if (trackComments) {
+//         trackComments.map(function (data) {
+//             return (
+//                 <div className='SONOS__COMMENTBOX___COMMENT' key='data.id'>
+//                     <img id={data.userId}
+//                          src={data.User.profileImageUrl != null ? data.User.profileImageUrl : '/img/musical-note_SM.png'}
+//                          alt='userIcon'/>
+//                     <p>{data.content}</p>
+//                 </div>
+//             )
+//         })
+//     }
+//     else {
+//         return (
+//             <>
+//                 <div className='SONOS__COMMENTBOX___COMMENT'>
+//                     <img id="Fake Comment 1"
+//                          src={'/img/musical-note_SM.png'}
+//                          alt='musicNote'/>
+//                     <p>Fake Comment 1</p>
+//                 </div>
+//                 <div className='SONOS__COMMENTBOX___COMMENT'>
+//                     <img id="Fake Comment 2"
+//                          src={'/img/musical-note_SM.png'}
+//                          alt='musicNote'/>
+//                     <p>Fake Comment 2</p>
+//                 </div>
+//                 <div className='SONOS__COMMENTBOX___COMMENT'>
+//                     <img id="Fake Comment 3"
+//                          src={'/img/musical-note_SM.png'}
+//                          alt='musicNote'/>
+//                     <p>Fake Comment 3</p>
+//                 </div>
+//             </>
+//         )
+//     }
+// }
