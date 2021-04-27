@@ -37,12 +37,11 @@ const validateComments = [
 \\=====================//
  */
 router.post('/', validateComments, asyncHandler(async (req, res) => {
-    console.log('==========');
-    console.log('POST to api/comment');
-
+    // console.log('==========');
+    // console.log('POST to api/comment');
     const { content, userId, trackId } = req.body;
-
-    console.log(content, userId, trackId);
+    //
+    // console.log(content, userId, trackId);
 
     const newComment = await Comment.uploadNewComment(content, userId, trackId);
 

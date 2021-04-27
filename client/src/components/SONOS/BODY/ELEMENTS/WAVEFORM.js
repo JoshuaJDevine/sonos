@@ -5,6 +5,8 @@ import React, { useEffect, useRef, useState } from "react";
 
 // @ts-ignore
 import WaveSurfer from "../../../../plugins/wavesurfer.js";
+import csrfFetch from "../../../../store/csrf";
+import {useSelector} from "react-redux";
 
 // @ts-ignore
 const formWaveSurferOptions = ref => ({
@@ -29,23 +31,27 @@ const formWaveSurferOptions = ref => ({
 
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
-export default function Waveform({ url }) {
+export default function Waveform({ url, trackId }) {
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);
     const [playing, setPlay] = useState(false);
     const [volume, setVolume] = useState(0.5);
     const [comment, setComment] = useState("")
+    const [currentTrackId, setCurrentTrackId] = useState(null);
+    const [allComments, setAllComments]= useState([])
+    const sessionUser = useSelector(state => state.session.user);
+
 
     // create new WaveSurfer instance
     // On component mount and when url changes
     useEffect(() => {
-
         setPlay(false);
-
 
         const options = formWaveSurferOptions(waveformRef.current)
 
         console.log("Prepping load Wavesurfer");
+        console.log("Setting trackId to", trackId);
+        setCurrentTrackId(trackId);
 
         wavesurfer.current = WaveSurfer.create(options);
 
@@ -70,6 +76,7 @@ export default function Waveform({ url }) {
         return () => wavesurfer.current.destroy();
     }, [url]);
 
+
     const handlePlayPause = () => {
         setPlay(!playing);
         // @ts-ignore
@@ -89,15 +96,23 @@ export default function Waveform({ url }) {
     };
 
     const handleComment = e => {
-        console.log("//-------TODO-------//")
-        console.log("//------------------//")
-        console.log("IMPLEMENT COMMENTS")
-        console.log("//------------------//")
-        console.log("//------------------//")
         const { target } = e;
         const newValue = target.value;
-
         setComment(newValue);
+    }
+
+    const submitComment = () => {
+        const content = comment
+        const userId = sessionUser.id;
+        const trackId = currentTrackId;
+
+        console.log("===========WAVEFORM SENDING COMMENT")
+        console.log(content, userId, trackId)
+
+        csrfFetch('/api/comment/', {
+            method: 'POST',
+            body: JSON.stringify({ content, userId, trackId })
+        }).then(res => res.json()).then(data => console.log(data));
     }
 
     const handleLike = e => {
@@ -144,6 +159,7 @@ export default function Waveform({ url }) {
                     onChange={handleComment}
                     value={comment}
                 />
+                <button onClick={submitComment}>{"COMMENT"}</button>
             </div>
             <GenerateUserComment/>
         </div>

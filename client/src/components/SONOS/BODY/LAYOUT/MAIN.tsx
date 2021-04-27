@@ -28,7 +28,7 @@ export default function BODY__CONTENT___MAIN(){
             console.log(userTrackList.length);
             userTrackList.forEach((track, index) => {
                 newPlaylist.push({
-                    id: index,
+                    id: track.id,
                     title: track.trackName,
                     url: track.url
                 })
@@ -69,7 +69,7 @@ export default function BODY__CONTENT___MAIN(){
                     selectedTrack={selectedTrack}
                     setSelectedTrack={setSelectedTrack}
                 />
-                <Waveform url={selectedTrack.url} />
+                <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
 
             </div>
             <BODY__CONTENT___LISTLARGE />
