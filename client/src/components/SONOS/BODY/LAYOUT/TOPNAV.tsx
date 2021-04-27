@@ -14,7 +14,12 @@ export default function BODY__CONTENT___TOPNAV(){
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
+    const handleLogout = function (){
 
+        console.log("logging out user");
+        dispatch(sessionActions.logout());
+        return <Redirect to='/home' />
+    }
 
     const ChangeTheme = function () {
         if (theme === Theme.Dark){
@@ -46,7 +51,24 @@ export default function BODY__CONTENT___TOPNAV(){
             </button>
             <input className='SearchBar' type="text" placeholder="Search.." name="search" />
 
-            {manageSessionButtons(sessionUser, dispatch)}
+            {sessionUser ?
+                <>
+                <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>
+                <Link to='/profile'>
+                    <button>Profile</button>
+                </Link>
+                <button onClick={handleLogout}>Logout</button>
+                </>
+                :
+                <>
+                    <Link to='/login'>
+                        <button>Log in</button>
+                    </Link>
+                    <Link to='/signup'>
+                        <button>Sign up</button>
+                    </Link>
+                </>
+            }
 
             <Link to='/upload'>
                 <button>

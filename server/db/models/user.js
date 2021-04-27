@@ -61,8 +61,8 @@ module.exports = (sequelize, DataTypes) => {
 
   //Auth flow
   User.prototype.toSafeObject = function() {
-    const { id, username, email } = this; // context is User instance
-    return { id, username, email };
+    const { id, username, email, profileImageUrl } = this; // context is User instance
+    return { id, username, email, profileImageUrl };
   };
 
   User.prototype.validatePassword = function (password) {
@@ -92,17 +92,12 @@ module.exports = (sequelize, DataTypes) => {
       },
     });
 
-    console.log("Found user");
-    const testUser = await User.findByPk(user.id, {
-      include: Track,
-    })
 
 
     if (user && user.validatePassword(password)) {
       return await User.scope('currentUser').findByPk(user.id, {
         include: Track,
       });
-      // return queries.findUserTracks(user.id);
     }
   };
 

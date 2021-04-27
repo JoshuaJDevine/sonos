@@ -46,7 +46,8 @@ router.post('/', validateLogin, asyncHandler(async (req, res, next) => {
     //Check for user
     const user = await User.login({ credential, password });
 
-
+    console.log("___SERVER___ FOUND USER:")
+    console.log(user);
 
         //If no user then generate error
         if (!user) {
