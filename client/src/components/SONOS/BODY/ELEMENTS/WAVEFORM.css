@@ -1,5 +1,6 @@
 .SONOS__COMMENTBOX {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .SONOS__COMMENTBOX___COMMENT {

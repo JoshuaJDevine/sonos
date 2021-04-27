@@ -8,6 +8,7 @@ import thunk from 'redux-thunk';
 import sessionReducer from './session';
 import trackReducer from "./track";
 import commentsReducer from "./comments";
+import likeReducer from "./likes";
 
 
 
@@ -20,7 +21,8 @@ import commentsReducer from "./comments";
 const rootReducer = combineReducers({
     session: sessionReducer,
     tracks: trackReducer,
-    comments: commentsReducer
+    comments: commentsReducer,
+    likes: likeReducer
 });
 
 let enhancer;

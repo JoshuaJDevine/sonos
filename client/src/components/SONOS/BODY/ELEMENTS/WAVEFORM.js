@@ -10,6 +10,9 @@ import WaveSurfer from "../../../../plugins/wavesurfer.js";
 import csrfFetch from "../../../../store/csrf";
 import {useDispatch, useSelector} from "react-redux";
 import {getTracksComments} from "../../../../store/comments";
+import {getTrackLike, updateTrackLike} from "../../../../store/likes";
+import * as sessionActions from "../../../../store/session";
+import {Link, Redirect} from "react-router-dom";
 
 // @ts-ignore
 const formWaveSurferOptions = ref => ({
@@ -32,15 +35,19 @@ const formWaveSurferOptions = ref => ({
 
 export default function Waveform({ url, trackId }) {
     const dispatch = useDispatch();
+    // dispatch(getTracksComments(trackId));
+
+
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);
     const [playing, setPlay] = useState(false);
     const [volume, setVolume] = useState(0.5);
     const [comment, setComment] = useState("")
     const [currentTrackId, setCurrentTrackId] = useState(null);
+    const [waveformReady, setWaveformReady] = useState(false);
     const sessionUser = useSelector(state => state.session.user);
     const trackComments = useSelector(state => state.comments.trackComments)
-    const  [likedTrack, setLikedTrack] = useState(false);
+    const trackLikeStatus = useSelector(state => state.likes.trackLike)
 
 
 
@@ -48,6 +55,7 @@ export default function Waveform({ url, trackId }) {
     // On component mount and when trackURL changes
     useEffect(() => {
         setPlay(false);
+        setWaveformReady(false);
 
         const options = formWaveSurferOptions(waveformRef.current)
 
@@ -66,7 +74,9 @@ export default function Waveform({ url, trackId }) {
                 wavesurfer.current.setVolume(volume);
                 setVolume(volume);
                 dispatch(getTracksComments(trackId));
+                dispatch(getTrackLike(sessionUser.id, trackId));
                 generateComments();
+                setWaveformReady(true);
             }
         });
 
@@ -79,17 +89,6 @@ export default function Waveform({ url, trackId }) {
 
     }, [url]);
 
-    const submitComment = () => {
-        const content = comment
-        const userId = sessionUser.id;
-        const trackId = currentTrackId;
-
-        csrfFetch('/api/comment/', {
-            method: 'POST',
-            body: JSON.stringify({ content, userId, trackId })
-        }).then(res => res.json()).then(data => console.log(data));
-
-    }
 
 
 
@@ -115,18 +114,27 @@ export default function Waveform({ url, trackId }) {
         setComment(newValue);
     }
 
+    const submitComment = () => {
+        const content = comment
+        const userId = sessionUser.id;
+        const trackId = currentTrackId;
 
+        if (sessionUser){
+            csrfFetch('/api/comment/', {
+                method: 'POST',
+                body: JSON.stringify({ content, userId, trackId })
+            }).then(res => res.json()).then(data => console.log(data));
+        }
+        dispatch(getTracksComments(trackId));
+        setComment("");
+
+    }
 
     const handleLike = e => {
         if (sessionUser){
-            if (likedTrack){
-                console.log(sessionUser.id, " unliked track", trackId);
-            }
-            else {
-                console.log(sessionUser.id, " liked track", trackId);
-            }
+            dispatch(updateTrackLike(sessionUser.id, trackId));
+            // dispatch(getTrackLike(sessionUser.id, trackId));
         }
-        setLikedTrack(!likedTrack);
     }
 
     const generateComments = function () {
@@ -162,8 +170,11 @@ export default function Waveform({ url, trackId }) {
 
     return (
         <div>
+            <div className='WaveformLoader'>
+                {waveformReady ? "" : "Please wait..."}
+            </div>
             <div id="waveform" ref={waveformRef} />
-            <div className="controls">
+            {waveformReady ?  <div className="controls">
                 <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
                 <input
                     className='SONOS__VOLUMESLIDER'
@@ -189,10 +200,31 @@ export default function Waveform({ url, trackId }) {
                     value={comment}
                 />
                 <button onClick={submitComment}>{"COMMENT"}</button>
-                <img className={`SONOS__TRACKLIKE ${likedTrack ? "like" : "unlike"}`} src='/img/sonos_star_bl.png' onClick={handleLike}></img>
+                <div className='LikeHolder'>
+                    {waveformReady ? <img className={`SONOS__TRACKLIKE ${trackLikeStatus ? "like" : "unlike"}`} src='/img/sonos_star_bl.png' onClick={handleLike}></img>: ""}
+                </div>
+            </div> : ""
+            }
 
-            </div>
-            <div className='SONOS__COMMENTBOX'>{generateComments()}</div>
+            <div className='SONOS__COMMENTBOX'>{trackComments && waveformReady ? generateComments() : ""}</div>
         </div>
     );
 }
+
+
+
+//
+// function manageWaveformLoading(loaded, waveformRef){
+//     if (loaded){
+//         return (
+//             <div>
+//                <p>Loading</p>
+//             </div>
+//         )
+//     }
+//     else {
+//         return (
+//
+//         )
+//     }
+// }
