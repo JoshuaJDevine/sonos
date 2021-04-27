@@ -45,7 +45,6 @@ router.get('/:trackId/comments', asyncHandler(async (req, res) => {
     return res.json(
         {comments}
     );
-
 }));
 
 router.post('/', validateComments, asyncHandler(async (req, res) => {

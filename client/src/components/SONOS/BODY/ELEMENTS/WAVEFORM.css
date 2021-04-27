@@ -1,11 +1,53 @@
+.SONOS__COMMENTBOX {
+    display: flex;
+}
+
 .SONOS__COMMENTBOX___COMMENT {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top: 1px solid grey;
+    padding-left: 20px;
+    padding-right: 10px;
+    border-right: 1px solid grey;
 }
 
 .SONOS__COMMENTBOX___COMMENT img {
     width: 30px;
     height: 30px;
+    padding-right: 10px;
+    transition:all 0.3s ease;
+}
+
+
+
+.SONOS__TRACKLIKE.like{
+    width: 30px;
+    height: 30px;
+    filter: invert(71%) sepia(100%) saturate(522%) hue-rotate(358deg) brightness(104%) contrast(103%);
+    transition:all 0.3s ease;
+}
+.SONOS__TRACKLIKE.like:hover{
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
+.SONOS__TRACKLIKE.unlike{
+    filter: none;
+    width: 30px;
+    height: 30px;
+    transition:all 0.3s ease;
+}
+.SONOS__TRACKLIKE.unlike:hover{
+    -webkit-transform: scale(1.3);
+    -ms-transform: scale(1.3);
+    transform: scale(1.3);
+}
+
+
+.SONOS__VOLUMESLIDER{
+    margin-right: 10px;
+}
+
+.SONOS__COMMENT--INPUT{
+    margin-left: 20px;
 }

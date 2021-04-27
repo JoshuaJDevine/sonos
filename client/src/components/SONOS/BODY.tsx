@@ -8,6 +8,7 @@ import BODY__SPLASH from "./BODY/SPLASH";
 import BODY__LOGIN from "./BODY/LOGIN";
 import BODY__SIGNUP from "./BODY/SIGNUP";
 import BODY__UPLOAD from "./BODY/UPLOAD";
+import BODY__CONTENT___TOPNAV from "./BODY/LAYOUT/TOPNAV";
 
 
 export default function BODY(){
@@ -31,6 +32,7 @@ export default function BODY(){
                     <BODY__SPLASH />
                 </Route>
                 <Route>
+                    <BODY__CONTENT___TOPNAV />
                     <p>ERROR. Page Not Found</p>
                 </Route>
 

@@ -1,10 +1,11 @@
 .playlist {
+    display: flex;
     text-align: left;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
+
 .playlist-item {
-    color: #444;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     cursor: pointer;
     padding: 1em;
@@ -21,4 +22,5 @@
 .controls {
     text-align: left;
     padding: 1em;
+    display: flex;
 }

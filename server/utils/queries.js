@@ -43,6 +43,31 @@ queries.findTrackComments = async function findTrackComments(trackId){
     return track;
 }
 
+queries.findTrackLikes = async function findTrackLikes(trackId, userId){
+    //Find like where the trackId and the userId match the params
+    const like = await Like.findOne({where: { userId: userId, trackId: trackId}})
+    return like;
+}
+queries.updateTrackLike = async function findTrackLikes(trackId, userId){
+    //Find like where the trackId and the userId match the params
+    const like = await Like.findOne({where: { userId: userId, trackId: trackId}})
+
+    console.log("==================LIKE WAS:")
+    console.log(like)
+
+    //If there is a like, delete it. Else, create it.
+    if (like != null) {
+        await like.destroy();
+        return "Destroyed!! What else is there to return? Probably something I don't remember atm..."
+    }
+    else {
+        await Like.createNewLike(userId, trackId );
+        const like = await Like.findOne({where: { userId: userId, trackId: trackId}})
+        console.log("==================NEW LIKE WAS:")
+        console.log(like)
+        return like;
+    }
+}
 
 
 // const user = await User.findByPk(userId);

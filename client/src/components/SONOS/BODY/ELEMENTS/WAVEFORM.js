@@ -40,6 +40,7 @@ export default function Waveform({ url, trackId }) {
     const [currentTrackId, setCurrentTrackId] = useState(null);
     const sessionUser = useSelector(state => state.session.user);
     const trackComments = useSelector(state => state.comments.trackComments)
+    const  [likedTrack, setLikedTrack] = useState(false);
 
 
 
@@ -117,11 +118,15 @@ export default function Waveform({ url, trackId }) {
 
 
     const handleLike = e => {
-        console.log("//-------TODO-------//")
-        console.log("//------------------//")
-        console.log("IMPLEMENT LIKES")
-        console.log("//------------------//")
-        console.log("//------------------//")
+        if (sessionUser){
+            if (likedTrack){
+                console.log(sessionUser.id, " unliked track", trackId);
+            }
+            else {
+                console.log(sessionUser.id, " liked track", trackId);
+            }
+        }
+        setLikedTrack(!likedTrack);
     }
 
     const generateComments = function () {
@@ -129,7 +134,7 @@ export default function Waveform({ url, trackId }) {
         // console.log(trackComments);
 
         if (trackComments != null){
-            let generateAllCommenrs = trackComments.map((comment) =>
+            let generateAllComments = trackComments.map((comment) =>
                 <div className='SONOS__COMMENTBOX___COMMENT' key={comment.id}>
                     <img id={comment.userId}
                          src={comment.User.profileImageUrl != null ? comment.User.profileImageUrl : '/img/musical-note_SM.png'}
@@ -139,7 +144,7 @@ export default function Waveform({ url, trackId }) {
             );
 
             return (
-                generateAllCommenrs
+                generateAllComments
             )
         }
         else {
@@ -161,6 +166,7 @@ export default function Waveform({ url, trackId }) {
             <div className="controls">
                 <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
                 <input
+                    className='SONOS__VOLUMESLIDER'
                     type="range"
                     id="volume"
                     name="volume"
@@ -172,67 +178,21 @@ export default function Waveform({ url, trackId }) {
                     onChange={onVolumeChange}
                     defaultValue={volume}
                 />
-                <label htmlFor="volume">Volume</label>
-                <button onClick={handleLike}>{"Like"}</button>
-                <label htmlFor="volume">Leave a comment    </label>
                 <input
                     maxLength="20" //TODO style and UX
+                    placeholder='Leave a comment'
                     type="text"
                     id="myComment"
                     name="myComment"
+                    className='SONOS__COMMENTINPUT'
                     onChange={handleComment}
                     value={comment}
                 />
                 <button onClick={submitComment}>{"COMMENT"}</button>
+                <img className={`SONOS__TRACKLIKE ${likedTrack ? "like" : "unlike"}`} src='/img/sonos_star_bl.png' onClick={handleLike}></img>
+
             </div>
-            <div className='commentswrapper'>{generateComments()}</div>
+            <div className='SONOS__COMMENTBOX'>{generateComments()}</div>
         </div>
     );
 }
-//
-//
-//
-// const GenerateUserComment = function() {
-//     const trackComments = useSelector(state => state.comments.trackComments)
-//     let boo =false;
-//     if (trackComments){
-//
-//         trackComments.map(function (d) {console.log(d)});
-//     }
-//     if (trackComments) {
-//         trackComments.map(function (data) {
-//             return (
-//                 <div className='SONOS__COMMENTBOX___COMMENT' key='data.id'>
-//                     <img id={data.userId}
-//                          src={data.User.profileImageUrl != null ? data.User.profileImageUrl : '/img/musical-note_SM.png'}
-//                          alt='userIcon'/>
-//                     <p>{data.content}</p>
-//                 </div>
-//             )
-//         })
-//     }
-//     else {
-//         return (
-//             <>
-//                 <div className='SONOS__COMMENTBOX___COMMENT'>
-//                     <img id="Fake Comment 1"
-//                          src={'/img/musical-note_SM.png'}
-//                          alt='musicNote'/>
-//                     <p>Fake Comment 1</p>
-//                 </div>
-//                 <div className='SONOS__COMMENTBOX___COMMENT'>
-//                     <img id="Fake Comment 2"
-//                          src={'/img/musical-note_SM.png'}
-//                          alt='musicNote'/>
-//                     <p>Fake Comment 2</p>
-//                 </div>
-//                 <div className='SONOS__COMMENTBOX___COMMENT'>
-//                     <img id="Fake Comment 3"
-//                          src={'/img/musical-note_SM.png'}
-//                          alt='musicNote'/>
-//                     <p>Fake Comment 3</p>
-//                 </div>
-//             </>
-//         )
-//     }
-// }

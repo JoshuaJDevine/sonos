@@ -5,6 +5,7 @@
  */
 const express = require('express')
 const asyncHandler = require('express-async-handler');
+const queries = require("../../utils/queries");
 const {singlePublicFileUpload} = require("../../awsS3");
 const {singleMulterUpload} = require("../../awsS3");
 const { Track } = require('../../db/models');
@@ -68,6 +69,19 @@ router.post(
         });
     })
 );
+
+router.get('/:trackId/:userId/like', asyncHandler(async (req, res) => {
+    const likes = await queries.findTrackLikes(req.params.trackId, req.params.userId);
+    return res.json(
+        {likes}
+    );
+}))
+router.post('/:trackId/:userId/like',  asyncHandler(async (req, res) => {
+        return res.json(
+            {like: await queries.updateTrackLike(req.params.trackId, req.params.userId)}
+        );
+    }
+))
 
 
 /*
