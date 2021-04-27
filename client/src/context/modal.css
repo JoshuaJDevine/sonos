@@ -1,0 +1,52 @@
+#modal {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+#modal-background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#modal-content {
+    color: white;
+    position: absolute;
+    padding: 10px;
+    border-radius: 10px;
+    background-color:dimgrey;
+}
+
+
+#modal Button {
+    font-family:'Montserrat', sans-serif;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 2;
+    font-size: 12px;
+    background-color : transparent;
+
+    border-top: 0;
+    border-bottom: 0;
+    transition: all .33s ease;
+    color: var(--p--main---dark);
+    border-right: 1px solid var(--background-color--accent2---dark);
+    border-left: 1px solid var(--background-color--accent2---dark);
+}
+
+
+#modal Button:Hover{
+    background-color: var(--button--hoverBGcolor---dark);
+}

@@ -19,9 +19,9 @@ export default function BODY(){
                 <Route exact path='/home'>
                     <BODY__CONTENT />
                 </Route>
-                <Route exact path='/login'>
-                    <BODY__LOGIN />
-                </Route>
+                {/*<Route exact path='/login'>*/}
+                {/*    <BODY__LOGIN />*/}
+                {/*</Route>*/}
                 <Route exact path='/signup'>
                     <BODY__SIGNUP />
                 </Route>

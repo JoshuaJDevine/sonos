@@ -64,7 +64,6 @@
 }
 .App.Light Button:Hover{
   background-color: var(--button--hoverBGcolor---light);
-
 }
 
 .App.Dark Button{

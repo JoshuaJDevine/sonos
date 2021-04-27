@@ -7,6 +7,7 @@ import {Theme, useTheme} from '../../../../context/ThemeContext';
 import './TOPNAV.css'
 import * as sessionActions from "../../../../store/session";
 import {useDispatch, useSelector} from "react-redux";
+import LOGINFORMMODAL from "../ELEMENTS/LOGINFORMMODAL";
 
 
 export default function BODY__CONTENT___TOPNAV(){
@@ -61,9 +62,8 @@ export default function BODY__CONTENT___TOPNAV(){
                 </>
                 :
                 <>
-                    <Link to='/login'>
-                        <button>Log in</button>
-                    </Link>
+                    <LOGINFORMMODAL>
+                    </LOGINFORMMODAL>
                     <Link to='/signup'>
                         <button>Sign up</button>
                     </Link>

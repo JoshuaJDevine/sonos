@@ -16,7 +16,7 @@ import {Theme, ThemeContext} from "./context/ThemeContext";
 import {useDispatch} from "react-redux";
 import * as sessionActions from "./store/session";
 
-
+import { ModalProvider } from "./context/Modal";
 
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
@@ -35,9 +35,12 @@ function App() {
     //App
     return (
         <ThemeContext.Provider value={{theme, setTheme}}>
-            <div className={'App ' + theme}>
-                <SONOS />
-            </div>
+            <ModalProvider>
+                <div className={'App ' + theme}>
+                    <SONOS />
+                </div>
+            </ModalProvider>
+
         </ThemeContext.Provider>
   );
 }
