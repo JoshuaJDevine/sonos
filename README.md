@@ -1,9 +1,34 @@
 sonos
+
+
+
+
+
+
+
+
+# SoundTrack
+
 An experimental ambient music generator
 
-Create your own beautiful ambient mixes. Experiment by uploading your own tracks. Explore and contribute to the rich tradition of experimental syntesized music. Sonos is an experimental app that allows users to create continousouly generateed, amibient music
+# Technologies 
+
+#### Front-End
+
+#### Back-End
+
+# Features
+
+# Future Implementations
+
+
+
+
+
 
 ###[WIP] Create your own beautiful ambient mixes. Experiment by uploading your own tracks.
+Create your own beautiful ambient mixes. Experiment by uploading your own tracks. Explore and contribute to the rich tradition of experimental syntesized music. Sonos is an experimental app that allows users to create continousouly generateed, amibient music
+
 
 Explore and contribute to the rich tradition of experimental synthesized music.
 
