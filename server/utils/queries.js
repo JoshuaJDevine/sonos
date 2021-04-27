@@ -28,9 +28,15 @@ queries.findUserTracks = async function findUserTracks(userId){
 //     });
 // }
 queries.findTrackComments = async function findTrackComments(trackId){
-    const track = await User.findByPk(trackId, {
-        include: Comment,
-    });
+    const track = await Track.findByPk(trackId,
+        {    include: [
+                { model : Comment ,
+                    include: {
+                        model : User
+                    }
+                }
+            ]}
+    );
     return track;
 }
 

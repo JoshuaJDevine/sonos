@@ -1,4 +1,5 @@
-// @ts-ignore
+// @ts-nocheck
+
 import './WAVEFORM.css'
 
 import React, { useEffect, useRef, useState } from "react";
@@ -6,10 +7,13 @@ import React, { useEffect, useRef, useState } from "react";
 // @ts-ignore
 import WaveSurfer from "../../../../plugins/wavesurfer.js";
 import csrfFetch from "../../../../store/csrf";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import csrf from "../../../../store/csrf";
+import {getTracksComments} from "../../../../store/comments";
 
 // @ts-ignore
 const formWaveSurferOptions = ref => ({
+
     container: ref,
     waveColor: "#787878",
     progressColor: "OrangeRed",
@@ -32,6 +36,8 @@ const formWaveSurferOptions = ref => ({
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 export default function Waveform({ url, trackId }) {
+    const dispatch = useDispatch();
+
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);
     const [playing, setPlay] = useState(false);
@@ -52,6 +58,11 @@ export default function Waveform({ url, trackId }) {
         console.log("Prepping load Wavesurfer");
         console.log("Setting trackId to", trackId);
         setCurrentTrackId(trackId);
+
+
+        //Get comments for trackId here
+        // const comments = await csrf(`/api/comment/${trackId}/comments`)
+        dispatch(getTracksComments(trackId));
 
         wavesurfer.current = WaveSurfer.create(options);
 

@@ -42,7 +42,6 @@ const validateComments = [
 router.get('/:trackId/comments', asyncHandler(async (req, res) => {
     // console.log(req.params.trackId);
     const comments = await queries.findTrackComments(req.params.trackId);
-
     return res.json({
         comments,
     });

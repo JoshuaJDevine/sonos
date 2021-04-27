@@ -54,15 +54,8 @@ const storeUserTracks = (tracks) => {
 export const getUsersTracks = (userData) => async (dispatch) => {
     const res = await csrfFetch(`/api/users/${userData}/tracks`);
 
-    // const Tracks = res();
-    // console.log(Tracks);
-    // if (res){
-    //     const serverRes = await res.json();
-    //     dispatch(getTracks(serverRes))
-    //     return res;
-    // }
     const serverRes = await res.json();
-    // console.log(serverRes.User.Tracks);
+
     dispatch(storeUserTracks(serverRes.User.Tracks))
     return res;
 
@@ -76,7 +69,7 @@ export const getUsersTracks = (userData) => async (dispatch) => {
 REDUCER
 ==============================
 */
-const initialState = { track: null };
+const initialState = { userTracks: null };
 const trackReducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
