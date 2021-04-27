@@ -20,9 +20,6 @@ const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
     // console.log("=======",tracks, selectedTrack);
     return (
         <div className='SONOS__PLAYLIST'>
-
-
-
             {dropDownOpen && (
                 <div className="SONOS__PLAYLIST___DROPDOWN">
                     <p>Choose a playlist</p>
@@ -33,7 +30,6 @@ const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
                     </ul>
                 </div>
             )}
-
             <div className="playlist">
                 <button type="button" className="button" onClick={handleDropdownClick}>
                     ☰

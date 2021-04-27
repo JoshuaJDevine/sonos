@@ -13,7 +13,7 @@ export default function BODY__CONTENT___MAIN(){
     const sessionUser = useSelector(state => state.session.user);
     const userTrackList = useSelector(state => state.tracks.userTracks);
     const [userTracks, setUserTracks] = useState([]);
-    const [testUserPlayList, setTestUserPlayList] = useState([])
+    const [selectedPlaylist, setSelectedPlaylist] = useState([])
 
     useEffect(() => {
         if (sessionUser){
@@ -34,7 +34,7 @@ export default function BODY__CONTENT___MAIN(){
                 })
                 console.log(track.url);
             })
-            setTestUserPlayList(newPlaylist);
+            setSelectedPlaylist(newPlaylist);
         }
     }, [userTrackList])
 
@@ -64,12 +64,26 @@ export default function BODY__CONTENT___MAIN(){
         <div className='BODY__CONTENT___MAIN'>
             <h3>BODY__CONTENT___MAIN</h3>
             <div>
-                <PlayList
-                    tracks={testUserPlayList.length > 0 ? testUserPlayList : testTracks}
-                    selectedTrack={selectedTrack}
-                    setSelectedTrack={setSelectedTrack}
-                />
-                <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
+                {selectedPlaylist.length > 0 ?
+                    <div>
+                        <PlayList
+                            tracks={selectedPlaylist}
+                            selectedTrack={selectedTrack}
+                            setSelectedTrack={setSelectedTrack}
+                        />
+                        <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
+                    </div>:
+                    <div>
+                        <PlayList
+                            tracks={testTracks}
+                            selectedTrack={selectedTrack}
+                            setSelectedTrack={setSelectedTrack}
+                        />
+                        <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
+                    </div>
+                }
+
+
 
             </div>
             <BODY__CONTENT___LISTLARGE />

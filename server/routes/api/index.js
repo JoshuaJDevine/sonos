@@ -8,7 +8,7 @@ const sessionRouter = require('./session.js');
 const usersRouter = require('./users.js');
 const  trackRouter = require('./track.js')
 const commentRouter = require('./comments')
-
+const playlistRouter = require('./playlists')
 //todo add routes for track crud
 
 
@@ -21,6 +21,7 @@ router.use('/session', sessionRouter);
 router.use('/users', usersRouter);
 router.use('/track', trackRouter);
 router.use('/comment', commentRouter)
+router.use('/playlist', playlistRouter)
 
 
 

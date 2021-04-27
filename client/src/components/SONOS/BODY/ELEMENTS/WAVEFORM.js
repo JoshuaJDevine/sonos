@@ -59,8 +59,8 @@ export default function Waveform({ url, trackId }) {
 
         const options = formWaveSurferOptions(waveformRef.current)
 
-        console.log("Prepping load Wavesurfer");
-        console.log("Setting trackId to", trackId);
+        // console.log("Prepping load Wavesurfer");
+        // console.log("Setting trackId to", trackId);
         setCurrentTrackId(trackId);
 
         wavesurfer.current = WaveSurfer.create(options);
