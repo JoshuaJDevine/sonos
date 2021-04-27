@@ -94,9 +94,9 @@ router.post(
 
 //api/users/:id/tracks
 router.get('/:userId/tracks', asyncHandler(async (req, res) => {
-    console.log(req.params);
+    // console.log(req.params);
 
-    const User = await queries.findUserTracks(13);
+    const User = await queries.findUserTracks(req.params.userId);
 
     // console.log(User.Tracks);
 
@@ -105,6 +105,7 @@ router.get('/:userId/tracks', asyncHandler(async (req, res) => {
     });
 
 }));
+
 
 
 

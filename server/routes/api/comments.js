@@ -5,7 +5,8 @@
  */
 const express = require('express')
 const asyncHandler = require('express-async-handler');
-const { Comment } = require('../../db/models');
+const { Comment, User } = require('../../db/models');
+const queries = require("../../utils/queries");
 const router = express.Router();
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -36,6 +37,18 @@ const validateComments = [
 ||ROUTES---------------||
 \\=====================//
  */
+
+//api/comment/:id/comments
+router.get('/:trackId/comments', asyncHandler(async (req, res) => {
+    // console.log(req.params.trackId);
+    const comments = await queries.findTrackComments(req.params.trackId);
+
+    return res.json({
+        comments,
+    });
+
+}));
+
 router.post('/', validateComments, asyncHandler(async (req, res) => {
     // console.log('==========');
     // console.log('POST to api/comment');
