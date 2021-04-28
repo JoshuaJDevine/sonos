@@ -51,6 +51,7 @@ export default function Waveform({ url, trackId }) {
     const [volume, setVolume] = useState(0.5);
     const [comment, setComment] = useState("")
     const [currentTrackId, setCurrentTrackId] = useState(null);
+    const [showComments, setShowComments] = useState(false);
     const [waveformReady, setWaveformReady] = useState(false);
     const sessionUser = useSelector(state => state.session.user);
     const trackComments = useSelector(state => state.comments.trackComments)
@@ -101,6 +102,10 @@ export default function Waveform({ url, trackId }) {
         wavesurfer.current.playPause();
     };
 
+    const handleShowComments = () => {
+        setShowComments(!showComments);
+    }
+
     const onVolumeChange = e => {
         const { target } = e;
         const newVolume = +target.value;
@@ -145,36 +150,30 @@ export default function Waveform({ url, trackId }) {
     const generateComments = function () {
         if (trackComments != null){
             let generateAllComments = trackComments.map((comment) =>
-                <div className='SONOS__COMMENTBOX___COMMENT' key={comment.id}>
-                    <img id={comment.userId}
-                         src={comment.User.profileImageUrl != null ? comment.User.profileImageUrl : '/img/musical-note_SM.png'}
-                         alt='userIcon'/>
-                    <p>{comment.content}</p>
-                </div>
+                    <div className='SONOS__COMMENTBOX___COMMENT' key={comment.id}>
+                        <img id={comment.userId}
+                             src={comment.User.profileImageUrl != null ? comment.User.profileImageUrl : '/img/musical-note_SM.png'}
+                             alt='userIcon'/>
+                        <p>{comment.content}</p>
+                    </div>
             );
             return (
                 generateAllComments
             )
         }
-        // else {
-        //     return(
-        //         <div className='SONOS__COMMENTBOX___COMMENT' key='data.id'>
-        //             <img id={1}
-        //                  src={'/img/musical-note_SM.png'}
-        //                  alt='userIcon'/>
-        //             <p>No Comments</p>
-        //         </div>
-        //     )
-        // }
+        else {
+            //IDE DONT LIKE NOT HAVING ELSE. NOT ONE BIT
+        }
     }
 
     return (
-        <div>
+        <div className='SONOS__WAVEFORM___WRAPPER'>
             <div className='WaveformLoader'>
                 {waveformReady ? "" : "Please wait..."}
             </div>
             <div id="waveform" ref={waveformRef} />
-            {waveformReady ?  <div className="controls">
+            {waveformReady ?
+                <div className="controls">
                 <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
                 <input
                     className='SONOS__VOLUMESLIDER'
@@ -205,7 +204,10 @@ export default function Waveform({ url, trackId }) {
                 </div>
             </div> : ""
             }
-            <div className='SONOS__COMMENTBOX'>{trackComments && waveformReady ? generateComments() : ""}</div>
+            <div className='SONOS__COMMENTBOX'>
+                <button onClick={handleShowComments}>{showComments ? "|||" : "COMMENTS"}</button>
+                {trackComments && waveformReady && showComments ? generateComments() : ""}
+            </div>
         </div>
     );
 }

@@ -101,7 +101,10 @@ module.exports = router;
 
 
 
-
+//TODO hook up thunks for creating playlist and adding tracks to playlist
+//Add button on wavrform control to add track to playlist
+//Highlight selected playlist for user
+//add profile theme options
 
 
 

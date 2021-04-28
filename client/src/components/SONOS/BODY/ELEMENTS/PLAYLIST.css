@@ -1,14 +1,77 @@
-.playlist {
-    display: flex;
-    flex-wrap: wrap;
-    text-align: left;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
+.SONOS__PLAYLIST{
+    margin-top: 10px;
+
+}
+
+.SONOS__PLAYLIST___MAINMENU {
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 30px;
+
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 34px 24px 2px rgba(0, 0, 0, 0.14);
+    transition:all 0.3s ease;
+}
+.SONOS__PLAYLIST___MAINMENU.light{
+    border-bottom: 1px solid var(--background-color--accent2---light);
+}
+.SONOS__PLAYLIST___MAINMENU.dark{
+    border-bottom: 1px solid var(--background-color--accent2---dark);
+}
+.SONOS__PLAYLIST___SUBMENU {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 30px;
+
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 26px 24px 2px rgba(0, 0, 0, 0.14);
+    transition:all 0.3s ease;
+}
+.SONOS__PLAYLIST___SUBMENU.light{
+    border-bottom: 1px solid var(--background-color--accent2---light);
+
+}
+.SONOS__PLAYLIST___SUBMENU.dark{
+    border-bottom: 1px solid var(--background-color--accent2---dark);
 }
 
 
+.SONOS__PLAYLIST li {
+
+}
+
+.SONOS__PLAYLIST li:hover {
+
+}
+
+
+.playlist {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 30px;
+
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 18px 24px 2px rgba(0, 0, 0, 0.14);
+    transition:all 0.3s ease;
+}
+.playlist.light {
+    border-bottom: 1px solid var(--background-color--accent2---light);
+}
+.playlist.dark {
+    border-bottom: 1px solid var(--background-color--accent2---dark);
+}
+
 .playlist-item {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.2);
     cursor: pointer;
     padding: 1em;
 }
@@ -27,59 +90,6 @@
     display: flex;
 }
 
-.SONOS__PLAYLIST___MAINMENU {
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-top: 20px;
-    min-height: 30px;
-
-    display: flex;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-    transition:all 0.3s ease;
+#waveform {
+    width: 80%;
 }
-.SONOS__PLAYLIST___MAINMENU.light{
-    border-bottom: 1px solid var(--background-color--accent2---light);
-
-}
-.SONOS__PLAYLIST___MAINMENU.dark{
-    border-bottom: 1px solid var(--background-color--accent2---dark);
-}
-.SONOS__PLAYLIST___SUBMENU {
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding-top: 20px;
-    min-height: 30px;
-
-    display: flex;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-    transition:all 0.3s ease;
-}
-.SONOS__PLAYLIST___SUBMENU.light{
-    border-bottom: 1px solid var(--background-color--accent2---light);
-
-}
-.SONOS__PLAYLIST___SUBMENU.dark{
-    border-bottom: 1px solid var(--background-color--accent2---dark);
-}
-
-.SONOS__PLAYLIST button {
-
-    padding: 8px 12px;
-
-    cursor: pointer;
-}
-
-
-
-.SONOS__PLAYLIST li {
-
-}
-
-.SONOS__PLAYLIST li:hover {
-
-}
-

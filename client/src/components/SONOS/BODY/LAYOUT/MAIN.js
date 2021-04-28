@@ -25,6 +25,9 @@ export default function BODY__CONTENT___MAIN(){
     const [selectedPlaylist, setSelectedPlaylist] = useState([])
     const [selectedTrack, setSelectedTrack] = useState(userTrackList);
     const [mainHeader, setMainHeader] = useState("/header_main_01.png")
+    const [showMenu, setShowMenu] = useState(false);
+    const [showSubMenu, setShowSubMenu] = useState(false);
+
     const mySelectedPlaylist = useSelector(state => state.playlists.playlists)
 
     useEffect(() => {
@@ -62,7 +65,7 @@ export default function BODY__CONTENT___MAIN(){
         let randNum = Math.floor(Math.random() * 8)+1;
         let randomHeader = "/img/header_main_0" + randNum + ".png"
         setMainHeader(randomHeader);
-    })
+    }, [mainHeader])
 
 
     const handlePlaylistClick = (e) => {
@@ -87,6 +90,13 @@ export default function BODY__CONTENT___MAIN(){
     const handleMyTracks = (e) => {
         console.log('//Get 10 random tracks!')
     }
+
+    const handleMenuView = (e) => {
+        setShowMenu(!showMenu);
+    }
+    const handleSubMenuView = (e) => {
+        setShowSubMenu(!showSubMenu);
+    }
     //
     // console.log("SELECTED TRACK IS");
     // console.log(selectedTrack);
@@ -103,21 +113,36 @@ export default function BODY__CONTENT___MAIN(){
                 <img id='main_header' src={mainHeader} alt='sonos_logo'/>
 
                     <div className="SONOS__PLAYLIST___MAINMENU">
-                        <button onClick={handleDiscover}>DISCOVER</button>
-                        <button onClick={handleCreateNewPlaylist}>MY TRACKS</button>
-                        <button onClick={handleMyTracks}>NEW PLAYLIST</button>
+                        <button onClick={handleMenuView}>{showMenu ? "|||" : "MENU"}</button>
+                        {showMenu ?
+                        <>
+                            <button onClick={handleDiscover}>DISCOVER</button>
+                            <button onClick={handleCreateNewPlaylist}>MY TRACKS</button>
+                            <button onClick={handleMyTracks}>NEW PLAYLIST</button>
+                        </>
+                            : <></>}
+
                     </div>
-                    <div className={"SONOS__PLAYLIST___SUBMENU" + mySelectedPlaylist.usersPlaylists !== undefined && mySelectedPlaylist?.usersPlaylists?.Playlists?.length > 0 ? "hidden" : ""}>
-                        {mySelectedPlaylist.usersPlaylists !== undefined && mySelectedPlaylist?.usersPlaylists?.Playlists?.length > 0 ?
-                            mySelectedPlaylist.usersPlaylists.Playlists.map((playlist) => (
-                                    <button value={playlist.id} key={playlist.id} onClick={handlePlaylistClick} >
-                                        {playlist.name}
-                                    </button>
-                                )
-                            )
+                    <div className={mySelectedPlaylist.usersPlaylists !== undefined && mySelectedPlaylist?.usersPlaylists?.Playlists?.length > 0 ?
+                        "SONOS__PLAYLIST___SUBMENU" : "SONOS__PLAYLIST___SUBMENU hidden"}>
+                        <button onClick={handleSubMenuView}>{showSubMenu ? "|||" : "PLAYLISTS"}</button>
+                        {showSubMenu ?
+                            <>
+                                {mySelectedPlaylist.usersPlaylists !== undefined && mySelectedPlaylist?.usersPlaylists?.Playlists?.length > 0 ?
+                                    mySelectedPlaylist.usersPlaylists.Playlists.map((playlist) => (
+                                            <button value={playlist.id} key={playlist.id} onClick={handlePlaylistClick} >
+                                                {playlist.name}
+                                            </button>
+                                        )
+                                    )
+                                    :
+                                    <div>
+                                    </div>
+                                }
+                            </>
                             :
-                            <div>
-                            </div>
+                            <>
+                            </>
                         }
                     </div>
                 <div>

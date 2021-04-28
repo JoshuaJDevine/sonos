@@ -1,6 +1,19 @@
 .SONOS__COMMENTBOX {
-    display: flex;
+    align-items: center;
     flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 30px;
+    width: 100%;
+    display: flex;
+    box-shadow: 0px -20px 20px 2px rgba(0, 0, 0, .2);
+    transition:all 0.3s ease;
+}
+.SONOS__COMMENTBOX.light {
+    border-bottom: 1px solid var(--background-color--accent2---light);
+}
+.SONOS__COMMENTBOX.dark {
+    border-bottom: 1px solid var(--background-color--accent2---dark);
 }
 
 .SONOS__COMMENTBOX___COMMENT {
@@ -51,4 +64,15 @@
 
 .SONOS__COMMENT--INPUT{
     margin-left: 20px;
+}
+
+.SONOS__WAVEFORM___WRAPPER{
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.SONOS__COMMENTSMENU{
+
 }
