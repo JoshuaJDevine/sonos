@@ -2,22 +2,23 @@
 // eslint-disable-next-line react/prop-types
 import './PLAYLIST.css'
 import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getUsersTracks} from "../../../../store/track";
-import {getUserPlaylist} from "../../../../store/playlist";
+import { useSelector} from "react-redux";
 
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
-
     const [dropDownOpen, setDropDownOpen] = useState(false);
     const mySelectedPlaylist = useSelector(state => state.playlists.playlists)
 
-    console.log(mySelectedPlaylist);
-    console.log( mySelectedPlaylist.usersPlaylists === undefined);
+    // console.log("-----PLAYLIST COMPONENT LOADING");
+    // useEffect(() =>{
+    //     console.log("-----PLAYLIST USEEFFECT RUNNING");
+    // })
+
+
+
     const handleDropdownClick = () => {
             setDropDownOpen(!dropDownOpen);
-
     };
     const handlePlaylistClick = (e) => {
         console.log('//todo HANDLE PLAYLIST CLICK');
@@ -27,10 +28,6 @@ const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
         console.log('----------------------------');
     }
 
-
-
-//Test
-    // console.log("=======",tracks, selectedTrack);
     return (
         <div className='SONOS__PLAYLIST'>
             {dropDownOpen && (

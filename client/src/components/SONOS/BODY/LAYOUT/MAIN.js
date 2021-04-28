@@ -17,35 +17,51 @@ export default function BODY__CONTENT___MAIN(){
     const userTrackList = useSelector(state => state.tracks.userTracks);
     const randomTracks = useSelector(state => state.tracks.randTracks);
     const [selectedPlaylist, setSelectedPlaylist] = useState([])
+    const [selectedTrack, setSelectedTrack] = useState(userTrackList);
 
     useEffect(() => {
         if (userTrackList){
-            // @ts-ignore
-            const newPlaylist = []
-            console.log(userTrackList.length);
-            userTrackList.forEach((track) => {
+            if (userTrackList.length > 0){
+                let newPlaylist = []
+                userTrackList.forEach((track) => {
+                    newPlaylist.push({
+                        id: track.id,
+                        title: track.trackName,
+                        url: track.url
+                    })
+                })
+                setSelectedPlaylist(newPlaylist);
+                setSelectedTrack(newPlaylist[0])
+            }
+        }
+
+        else if (randomTracks){
+            let newPlaylist = []
+            randomTracks.forEach((track) => {
                 newPlaylist.push({
                     id: track.id,
                     title: track.trackName,
                     url: track.url
                 })
-                console.log(track.url);
             })
-            // @ts-ignore
             setSelectedPlaylist(newPlaylist);
+            setSelectedTrack(newPlaylist[0])
         }
-    }, [userTrackList])
+    }, [userTrackList, sessionUser, randomTracks])
 
-    const testTracks = [{
-        id: 15,
-        title: "test",
-        url: "https://sonos-app.s3.amazonaws.com/1619576725478.mp3"
-    }]
-
-    const [selectedTrack, setSelectedTrack] = useState(testTracks[0]);
+    // const testTracks = [{
+    //     id: 15,
+    //     title: "test",
+    //     url: "https://sonos-app.s3.amazonaws.com/1619576725478.mp3"
+    // }]
 
 
 
+
+    console.log("SELECTED TRACK IS");
+    console.log(selectedTrack);
+    console.log("SELECTED PLAYLIST IS");
+    console.log(selectedPlaylist);
     if (!sessionUser){
         return <Redirect to='/' />
     }
@@ -60,22 +76,14 @@ export default function BODY__CONTENT___MAIN(){
                                 tracks={selectedPlaylist}
                                 selectedTrack={selectedTrack}
                                 setSelectedTrack={setSelectedTrack}
-                                playlists={null}
+                                playlists={selectedPlaylist}
                             />
                                 <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
                         </div>:
                         <div>
-                            <PlayList
-                                tracks={testTracks}
-                                selectedTrack={selectedTrack}
-                                setSelectedTrack={setSelectedTrack}
-                            />
-                            <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
+                            <p>Please wait... </p>
                         </div>
                     }
-
-
-
                 </div>
                 <BODY__CONTENT___LISTLARGE />
                 <BODY__CONTENT___TABS />

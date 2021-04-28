@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, {useEffect} from "react";
 import {Link, Redirect} from "react-router-dom";
 
 
@@ -12,6 +12,10 @@ import SIGNUPFORMMODAL from "../ELEMENTS/SIGNUPFORMMODAL";
 
 
 export default function BODY__CONTENT___TOPNAV(){
+    // console.log("-----TOPNAV COMPONENT LOADING");
+    // useEffect(() =>{
+    //     console.log("-----TOPNAV USEEFFECT RUNNING");
+    // })
     const { theme, setTheme} = useTheme();
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();

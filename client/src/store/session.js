@@ -1,6 +1,6 @@
 import { csrfFetch } from './csrf';
 import {getUserPlaylist} from "./playlist";
-import {getRandomTrack, getUsersTracks} from "./track";
+import {eraseUserTrackList, getRandomTrack, getUsersTracks} from "./track";
 
 /*
 ==============================
@@ -28,9 +28,14 @@ export const login = (user) => async (dispatch) => {
     });
     const data = await response.json();
 
-    console.log("THE USER IS")
-    console.log(data);
+    // console.log("THE USER IS")
+    // console.log(data);
 
+    dispatch(getRandomTrack());
+    if (data.user !== undefined){
+        dispatch(getUserPlaylist(data.user.id))
+        dispatch(getUsersTracks(data.user.id))
+    }
     dispatch(storeUser(data.user));
     return response;
 };
@@ -38,19 +43,17 @@ export const login = (user) => async (dispatch) => {
 export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('/api/session');
     const data = await response.json();
-    console.log("RESTORE USER DATA IS: ")
-    console.log(data.user === undefined);
-
-    console.log()
+    // console.log("RESTORE USER DATA IS: ")
+    // console.log(data.user === undefined);
+    // console.log()
 
     //TODO Add Demo User
+    dispatch(getRandomTrack());
     if (data.user !== undefined){
         dispatch(getUserPlaylist(data.user.id))
         dispatch(getUsersTracks(data.user.id))
-
     }
     dispatch(storeUser(data.user));
-    dispatch(getRandomTrack());
     return response;
 };
 //Thunk Creator                                            //Thunk
@@ -107,6 +110,7 @@ export const logout = () => async (dispatch) => {
         method: "DELETE",
     })
     dispatch(removeUser());
+    dispatch(eraseUserTrackList());
     return res;
 }
 

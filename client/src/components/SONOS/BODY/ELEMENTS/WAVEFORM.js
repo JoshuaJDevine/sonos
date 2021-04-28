@@ -13,6 +13,8 @@ import {getTracksComments} from "../../../../store/comments";
 import {getTrackLike, updateTrackLike} from "../../../../store/likes";
 import * as sessionActions from "../../../../store/session";
 import {Link, Redirect} from "react-router-dom";
+import {getUserPlaylist} from "../../../../store/playlist";
+import {getUsersTracks} from "../../../../store/track";
 
 // @ts-ignore
 const formWaveSurferOptions = ref => ({
@@ -34,6 +36,11 @@ const formWaveSurferOptions = ref => ({
 
 
 export default function Waveform({ url, trackId }) {
+    // console.log("-----WAVEFORM COMPONENT LOADING");
+    // useEffect(() =>{
+    //     console.log("-----WAVEFORM USEEFFECT RUNNING");
+    // })
+
     const dispatch = useDispatch();
     // dispatch(getTracksComments(trackId));
 
@@ -83,7 +90,7 @@ export default function Waveform({ url, trackId }) {
         // Removes events, elements and disconnects Web Audio nodes.
         // when component unmount
         return () => {
-            console.log("===========Cleaning up")
+            console.log("-----WAVEFORM CLEANING UP");
             wavesurfer.current.destroy();
         }
 
@@ -149,16 +156,16 @@ export default function Waveform({ url, trackId }) {
                 generateAllComments
             )
         }
-        else {
-            return(
-                <div className='SONOS__COMMENTBOX___COMMENT' key='data.id'>
-                    <img id={1}
-                         src={'/img/musical-note_SM.png'}
-                         alt='userIcon'/>
-                    <p>No Comments</p>
-                </div>
-            )
-        }
+        // else {
+        //     return(
+        //         <div className='SONOS__COMMENTBOX___COMMENT' key='data.id'>
+        //             <img id={1}
+        //                  src={'/img/musical-note_SM.png'}
+        //                  alt='userIcon'/>
+        //             <p>No Comments</p>
+        //         </div>
+        //     )
+        // }
     }
 
     return (

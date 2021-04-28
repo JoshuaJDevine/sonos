@@ -62,7 +62,6 @@ export const getUsersTracks = (userData) => async (dispatch) => {
     const res = await csrfFetch(`/api/users/${userData}/tracks`);
 
     const serverRes = await res.json();
-
     dispatch(storeUserTracks(serverRes.User.Tracks))
     return res;
 }
@@ -74,6 +73,32 @@ export const getRandomTrack = () => async (dispatch) => {
     dispatch(storeRandomTracks(serverRes.randTracks))
     return res;
 }
+
+
+
+
+/*
+==============================
+REMOVE_TRACKS
+==============================
+*/
+//Type
+const REMOVE_TRACKS = 'session/removeTracks';
+//Action Creator
+const removeTracks = () => {
+    return {
+        type: REMOVE_TRACKS,
+    };
+};
+//Thunk Creator                                 //Thunk
+export const eraseUserTrackList = () => async (dispatch) => {
+    dispatch(removeTracks());
+}
+
+
+
+
+
 
 
 
@@ -96,6 +121,11 @@ const trackReducer = (state = initialState, action) => {
         //     return newState;
         case STORE_RANDOMTRACK:
             return { ...state, randTracks: action.payload}
+        case REMOVE_TRACKS:
+            newState = Object.assign({}, state);
+            newState.userTracks = null;
+            newState.randTracks = null;
+            return newState;
         default:
             return state;
     }

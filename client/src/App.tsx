@@ -29,7 +29,10 @@ function App() {
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
         console.log("APP RESTORING USER")
-        dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+        dispatch(sessionActions.restoreUser()).then(() => {
+            setIsLoaded(true)
+            console.log("APP FINISHED LOADING USER")
+        });
     }, [dispatch]);
 
     //App

@@ -20,8 +20,8 @@ const storeTrackLike = (like) => {
 export const getTrackLike = (userId, trackId) => async (dispatch) => {
     const res = await csrfFetch(`/api/track/${trackId}/${userId}/like`);
     const serverRes = await res.json();
-    console.log("====GETTING TRACK LIKE=====");
-    console.log(serverRes.likes);
+    // console.log("====GETTING TRACK LIKE=====");
+    // console.log(serverRes.likes);
     if (serverRes.likes != null){
         dispatch(storeTrackLike(true))
     }

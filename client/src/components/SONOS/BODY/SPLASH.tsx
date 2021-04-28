@@ -7,8 +7,7 @@ import {Redirect} from "react-router-dom";
 
 export default function BODY__SPLASH(){
     const sessionUser = useSelector(state => state.session.user);
-
-    console.log(sessionUser);
+    // console.log(sessionUser);
 
     if (sessionUser){
         return <Redirect to='/home' />
