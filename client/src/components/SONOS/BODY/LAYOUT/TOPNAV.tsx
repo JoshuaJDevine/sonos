@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, {useEffect, useState} from "react";
+import React from "react";
 import {Link, Redirect} from "react-router-dom";
 
 
@@ -8,6 +8,7 @@ import './TOPNAV.css'
 import * as sessionActions from "../../../../store/session";
 import {useDispatch, useSelector} from "react-redux";
 import LOGINFORMMODAL from "../ELEMENTS/LOGINFORMMODAL";
+import SIGNUPFORMMODAL from "../ELEMENTS/SIGNUPFORMMODAL";
 
 
 export default function BODY__CONTENT___TOPNAV(){
@@ -16,8 +17,6 @@ export default function BODY__CONTENT___TOPNAV(){
     const dispatch = useDispatch();
 
     const handleLogout = function (){
-
-        console.log("logging out user");
         dispatch(sessionActions.logout());
         return <Redirect to='/home' />
     }
@@ -34,9 +33,7 @@ export default function BODY__CONTENT___TOPNAV(){
     return(
         <div className={'BODY__CONTENT___TOPNAV ' + theme}>
             <img id='nav-logo' src="/logo_basic_lc.png" alt='sonos_logo'/>
-            <button onClick={ChangeTheme}>
-                { theme }
-            </button>
+
             <Link to ='/home'>
                 <button>
                     Home
@@ -44,48 +41,45 @@ export default function BODY__CONTENT___TOPNAV(){
             </Link>
 
             <button>
-                Stream
-            </button>
-
-            <button>
                 Library
             </button>
+
             <input className='SearchBar' type="text" placeholder="Search.." name="search" />
+
+
+
+
+
 
             {sessionUser ?
                 <>
-                <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>
-                <Link to='/profile'>
-                    <button>Profile</button>
-                </Link>
-                <button onClick={handleLogout}>Logout</button>
+                    <Link to='/profile'>
+                        <button>Profile</button>
+                    </Link>
+
+                    <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>
+
+                    <button onClick={handleLogout}>Logout</button>
                 </>
                 :
                 <>
                     <LOGINFORMMODAL>
                     </LOGINFORMMODAL>
-                    <Link to='/signup'>
-                        <button>Sign up</button>
-                    </Link>
+                    <SIGNUPFORMMODAL>
+                    </SIGNUPFORMMODAL>
                 </>
             }
 
-            <Link to='/upload'>
-                <button>
-                    Upload
-                </button>
-            </Link>
-
-            <button id={'hamburgerMenu'}>
-                ...
+            <button onClick={ChangeTheme}>
+                { theme }
             </button>
+
         </div>
     )
 }
 
 function manageSessionButtons(sessionUser, dispatch){
     const handleLogout = function (){
-
         console.log("logging out user");
         dispatch(sessionActions.logout());
         return <Redirect to='/home' />

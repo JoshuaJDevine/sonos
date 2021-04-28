@@ -26,6 +26,10 @@ export const getTracksComments = (trackId) => async (dispatch) => {
     if (serverRes.comments != undefined){
         dispatch(storeTrackComments(serverRes.comments.Comments))
     }
+    else {
+        console.log("DISPATRCH EMPTY ARRAY")
+        dispatch(storeTrackComments([]))
+    }
     return res;
 }
 
@@ -40,7 +44,7 @@ const initialState = { trackComments: null };
 const commentsReducer = (state = initialState, action) => {
     switch (action.type) {
         case STORE_TRACKCOMMENTS:
-            return { ...state, trackComments: action.payload };
+            return { trackComments: action.payload };
         default:
             return state;
     }

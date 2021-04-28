@@ -4,6 +4,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import * as trackActions from "../../../../store/track";
+import BODY__CONTENT from "../CONTENT";
 
 export default function BODY__ELEMENTS___UPLOADFORM(){
     const dispatch = useDispatch();
@@ -12,10 +13,6 @@ export default function BODY__ELEMENTS___UPLOADFORM(){
     const [track, setTrack] = useState(null);
     const [errors, setErrors] = useState([]);
 
-    if (!sessionUser){
-        console.log("User not authorized, Redirecting to login")
-        return <Redirect to='/login' />
-    }
 
     const handleSubmit = (e) => {
 

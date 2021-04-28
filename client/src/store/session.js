@@ -39,10 +39,12 @@ export const restoreUser = () => async dispatch => {
     const response = await csrfFetch('/api/session');
     const data = await response.json();
     console.log("RESTORE USER DATA IS: ")
-    console.log(data);
+    console.log(data.user === undefined);
+
+    console.log()
 
     //TODO Add Demo User
-    if (data.length > 0){
+    if (data.user !== undefined){
         dispatch(getUserPlaylist(data.user.id))
         dispatch(getUsersTracks(data.user.id))
 

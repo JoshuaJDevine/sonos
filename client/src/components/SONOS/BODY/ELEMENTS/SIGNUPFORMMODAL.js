@@ -1,22 +1,21 @@
-import './LOGINFORMMODAL.css'
+import './SIGNUPFORMMODAL.css'
 import React, { useState } from 'react';
 import { Modal } from '../../../../context/Modal';
+import BODY__ELEMENTS___SIGNUPFORM from "./SIGNUPFORM";
 
-import BODY__ELEMENTS___LOGINFORM from './LOGINFORM';
-
-function BODY__LOGINFORMMODAL() {
+function BODY__SIGNUPFORMMODAL() {
     const [showModal, setShowModal] = useState(false);
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Log In</button>
+            <button onClick={() => setShowModal(true)}>Sign Up</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <BODY__ELEMENTS___LOGINFORM />
+                    <BODY__ELEMENTS___SIGNUPFORM />
                 </Modal>
             )}
         </>
     );
 }
 
-export default BODY__LOGINFORMMODAL;
+export default BODY__SIGNUPFORMMODAL;

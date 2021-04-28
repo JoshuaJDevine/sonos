@@ -1,6 +1,6 @@
 import './LOGINFORM.css'
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Redirect} from "react-router-dom";
 import * as sessionActions from "../../../../store/session";
@@ -13,7 +13,6 @@ export default function BODY__ELEMENTS___LOGINFORM() {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) {
-        console.log("User", sessionUser, " is logged in. Redirecting to /home")
         return <Redirect to='/home' />
     }
 
@@ -24,11 +23,17 @@ export default function BODY__ELEMENTS___LOGINFORM() {
         return dispatch(sessionActions.login({ credential, password }))
             .catch(async (res) => {
                 const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
+                if (data && data.errors){
+                    setErrors(data.errors);
+                }
             });
     }
 
-   return (
+
+
+
+    return (
+
         <div className='BODY__ELEMENTS___LOGINFORM'>
             <form onSubmit={handleSubmit}>
                 <div className='SONOS__ERRORS'>

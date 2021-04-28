@@ -6,29 +6,17 @@ import BODY__CONTENT___CAROUSEL from "../ELEMENTS/CAROUSEL";
 import Waveform from "../ELEMENTS/WAVEFORM";
 import PlayList from "../ELEMENTS/PLAYLIST";
 import React, {useState, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {getRandomTrack, getUsersTracks} from "../../../../store/track";
-import {getUserPlaylist} from "../../../../store/playlist";
+import { useSelector} from "react-redux";
 
+import './MAIN.css'
+import {Redirect} from "react-router-dom";
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 export default function BODY__CONTENT___MAIN(){
-
-
-    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const userTrackList = useSelector(state => state.tracks.userTracks);
     const randomTracks = useSelector(state => state.tracks.randTracks);
     const [selectedPlaylist, setSelectedPlaylist] = useState([])
-
-
-    useEffect(() => {
-        if (sessionUser) {
-            dispatch(getUsersTracks(sessionUser.id))
-            dispatch(getUserPlaylist(sessionUser.id))
-        }
-
-    }, [dispatch])
 
     useEffect(() => {
         if (userTrackList){
@@ -48,55 +36,51 @@ export default function BODY__CONTENT___MAIN(){
         }
     }, [userTrackList])
 
-
-
-
-
     const testTracks = [{
         id: 15,
         title: "test",
         url: "https://sonos-app.s3.amazonaws.com/1619576725478.mp3"
     }]
 
-
-    //Discover Branch
-    // console.log(testUserPlayList);
-
     const [selectedTrack, setSelectedTrack] = useState(testTracks[0]);
 
 
 
-    return(
+    if (!sessionUser){
+        return <Redirect to='/' />
+    }
+    else {
+        return(
+            <div className='BODY__CONTENT___MAIN'>
+                <h3>BODY__CONTENT___MAIN</h3>
+                <div>
+                    {selectedPlaylist.length > 0 ?
+                        <div>
+                            <PlayList
+                                tracks={selectedPlaylist}
+                                selectedTrack={selectedTrack}
+                                setSelectedTrack={setSelectedTrack}
+                                playlists={null}
+                            />
+                                <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
+                        </div>:
+                        <div>
+                            <PlayList
+                                tracks={testTracks}
+                                selectedTrack={selectedTrack}
+                                setSelectedTrack={setSelectedTrack}
+                            />
+                            <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
+                        </div>
+                    }
 
-        <div className='BODY__CONTENT___MAIN'>
-            <h3>BODY__CONTENT___MAIN</h3>
-            <div>
-                {selectedPlaylist.length > 0 ?
-                    <div>
-                        <PlayList
-                            tracks={selectedPlaylist}
-                            selectedTrack={selectedTrack}
-                            setSelectedTrack={setSelectedTrack}
-                            playlists={null}
-                        />
-                        <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
-                    </div>:
-                    <div>
-                        <PlayList
-                            tracks={testTracks}
-                            selectedTrack={selectedTrack}
-                            setSelectedTrack={setSelectedTrack}
-                        />
-                        <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
-                    </div>
-                }
 
 
-
+                </div>
+                <BODY__CONTENT___LISTLARGE />
+                <BODY__CONTENT___TABS />
+                <BODY__CONTENT___CAROUSEL />
             </div>
-            <BODY__CONTENT___LISTLARGE />
-            <BODY__CONTENT___TABS />
-            <BODY__CONTENT___CAROUSEL />
-        </div>
-    )
+        )
+    }
 }

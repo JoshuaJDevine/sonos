@@ -20,8 +20,8 @@ const formWaveSurferOptions = ref => ({
     waveColor: "#787878",
     progressColor: "OrangeRed",
     cursorColor: "OrangeRed",
-    barWidth: 5,
-    barRadius: 3,
+    barWidth: 2,
+    barRadius: 1,
     responsive: true,
     height: 150,
     // If true, normalize by the maximum peak instead of 1.0.
@@ -56,6 +56,8 @@ export default function Waveform({ url, trackId }) {
     useEffect(() => {
         setPlay(false);
         setWaveformReady(false);
+        dispatch(getTracksComments(trackId));
+
 
         const options = formWaveSurferOptions(waveformRef.current)
 
@@ -73,9 +75,7 @@ export default function Waveform({ url, trackId }) {
             if (wavesurfer.current) {
                 wavesurfer.current.setVolume(volume);
                 setVolume(volume);
-                dispatch(getTracksComments(trackId));
                 dispatch(getTrackLike(sessionUser.id, trackId));
-                generateComments();
                 setWaveformReady(true);
             }
         });
@@ -88,10 +88,6 @@ export default function Waveform({ url, trackId }) {
         }
 
     }, [url]);
-
-
-
-
 
     const handlePlayPause = () => {
         setPlay(!playing);
@@ -123,9 +119,11 @@ export default function Waveform({ url, trackId }) {
             csrfFetch('/api/comment/', {
                 method: 'POST',
                 body: JSON.stringify({ content, userId, trackId })
-            }).then(res => res.json()).then(data => console.log(data));
+            }).then(res => res.json()).then((data) =>{
+                console.log(data);
+                dispatch(getTracksComments(trackId));
+            })
         }
-        dispatch(getTracksComments(trackId));
         setComment("");
 
     }
@@ -138,9 +136,6 @@ export default function Waveform({ url, trackId }) {
     }
 
     const generateComments = function () {
-        // console.log("===========Generating Comments")
-        // console.log(trackComments);
-
         if (trackComments != null){
             let generateAllComments = trackComments.map((comment) =>
                 <div className='SONOS__COMMENTBOX___COMMENT' key={comment.id}>
@@ -150,7 +145,6 @@ export default function Waveform({ url, trackId }) {
                     <p>{comment.content}</p>
                 </div>
             );
-
             return (
                 generateAllComments
             )
@@ -166,7 +160,6 @@ export default function Waveform({ url, trackId }) {
             )
         }
     }
-
 
     return (
         <div>
@@ -205,26 +198,7 @@ export default function Waveform({ url, trackId }) {
                 </div>
             </div> : ""
             }
-
             <div className='SONOS__COMMENTBOX'>{trackComments && waveformReady ? generateComments() : ""}</div>
         </div>
     );
 }
-
-
-
-//
-// function manageWaveformLoading(loaded, waveformRef){
-//     if (loaded){
-//         return (
-//             <div>
-//                <p>Loading</p>
-//             </div>
-//         )
-//     }
-//     else {
-//         return (
-//
-//         )
-//     }
-// }

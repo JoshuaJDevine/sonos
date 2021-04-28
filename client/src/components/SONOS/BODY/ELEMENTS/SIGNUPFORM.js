@@ -15,11 +15,6 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
     const [confirmPassword, setConfirmPassword] = useState("");
     const [errors, setErrors] = useState([]);
 
-    if (sessionUser){
-        console.log("User already logged in and accessing sign up. Redirecting to /")
-        return <Redirect to='/home' />
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password === confirmPassword) {
@@ -47,6 +42,9 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
         if (file) setImage(file);
     };
 
+    if (sessionUser){
+        return <Redirect to='/home' />
+    }
     return (
         <div className='BODY__ELEMENTS___SIGNUPFORM'>
             <form onSubmit={handleSubmit}>
