@@ -1,4 +1,5 @@
-// @ts-nocheck
+// @ts-ignore
+// eslint-disable-next-line react/prop-types
 import BODY__CONTENT___LISTLARGE from "../ELEMENTS/LISTLARGE";
 import BODY__CONTENT___TABS from "../ELEMENTS/TABS";
 import BODY__CONTENT___CAROUSEL from "../ELEMENTS/CAROUSEL";
@@ -7,7 +8,10 @@ import PlayList from "../ELEMENTS/PLAYLIST";
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getUsersTracks} from "../../../../store/track";
+import {getUserPlaylist} from "../../../../store/playlist";
 
+// @ts-ignore
+// eslint-disable-next-line react/prop-types
 export default function BODY__CONTENT___MAIN(){
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
@@ -18,12 +22,13 @@ export default function BODY__CONTENT___MAIN(){
     useEffect(() => {
         if (sessionUser){
             dispatch(getUsersTracks(sessionUser.id))
+            dispatch(getUserPlaylist(sessionUser.id))
         }
     }, [dispatch])
 
     useEffect(() => {
-        console.log(userTrackList);
         if (userTrackList){
+            // @ts-ignore
             const newPlaylist = []
             console.log(userTrackList.length);
             userTrackList.forEach((track, index) => {
@@ -34,6 +39,7 @@ export default function BODY__CONTENT___MAIN(){
                 })
                 console.log(track.url);
             })
+            // @ts-ignore
             setSelectedPlaylist(newPlaylist);
         }
     }, [userTrackList])
@@ -70,6 +76,7 @@ export default function BODY__CONTENT___MAIN(){
                             tracks={selectedPlaylist}
                             selectedTrack={selectedTrack}
                             setSelectedTrack={setSelectedTrack}
+                            playlists={null}
                         />
                         <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
                     </div>:

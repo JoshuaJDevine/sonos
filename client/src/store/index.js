@@ -9,6 +9,7 @@ import sessionReducer from './session';
 import trackReducer from "./track";
 import commentsReducer from "./comments";
 import likeReducer from "./likes";
+import playlistReducer from "./playlist";
 
 
 
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     session: sessionReducer,
     tracks: trackReducer,
     comments: commentsReducer,
-    likes: likeReducer
+    likes: likeReducer,
+    playlists: playlistReducer
 });
 
 let enhancer;

@@ -36,20 +36,20 @@
 }
 
 
-.SONOS__PLAYLIST ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.SONOS__PLAYLIST button {
+
+    padding: 8px 12px;
+
+    cursor: pointer;
 }
 
 
 
 .SONOS__PLAYLIST li {
-    padding: 8px 12px;
+
 }
 
 .SONOS__PLAYLIST li:hover {
-    background-color: rgba(0, 0, 0, 0.14);
-    cursor: pointer;
+
 }
 

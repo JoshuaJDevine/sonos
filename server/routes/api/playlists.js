@@ -60,8 +60,8 @@ router.post('/', asyncHandler(async (req, res) => {
 router.post('/addTrack/:trackId/:playlistId/', asyncHandler(async (req, res) => {
     const { trackId, playlistId} = req.params;
 
-    const myPlaylist = await Playlist.findByPk(playlistId);
     const myTrack = await  Track.findByPk(trackId)
+    const myPlaylist = await Playlist.findByPk(playlistId);
 
 
     const addTrackToPlaylist = await myTrack.addPlaylist(myPlaylist);

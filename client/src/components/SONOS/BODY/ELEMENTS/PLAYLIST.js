@@ -1,33 +1,53 @@
-
+// @ts-ignore
+// eslint-disable-next-line react/prop-types
 import './PLAYLIST.css'
 import React, {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {getUsersTracks} from "../../../../store/track";
+import {getUserPlaylist} from "../../../../store/playlist";
 
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
+
     const [dropDownOpen, setDropDownOpen] = useState(false);
+    const mySelectedPlaylist = useSelector(state => state.playlists.playlists)
+
+    console.log(mySelectedPlaylist);
+    console.log( mySelectedPlaylist.usersPlaylists === undefined);
     const handleDropdownClick = () => {
-        setDropDownOpen(!dropDownOpen);
+            setDropDownOpen(!dropDownOpen);
+
     };
+    const handlePlaylistClick = (e) => {
+        console.log('//todo HANDLE PLAYLIST CLICK');
+        console.log('----------------------------');
+        console.log("For playlist", e.target.value);
+        console.log('----------------------------');
+        console.log('----------------------------');
+    }
 
-    const playlistChoices = [
-        { key: '1', text: 'MyTracks' },
-        { key: '2', text: 'Discover' },
-        { key: '3', text: 'Playlist 1' },
-    ]
 
 
+//Test
     // console.log("=======",tracks, selectedTrack);
     return (
         <div className='SONOS__PLAYLIST'>
             {dropDownOpen && (
                 <div className="SONOS__PLAYLIST___DROPDOWN">
-                    <p>Choose a playlist</p>
-                    <ul>
-                        <li>Option 2</li>
-                        <li>Option 3</li>
-                        <li>Option 4</li>
-                    </ul>
+                    {mySelectedPlaylist.usersPlaylists !== undefined ?  <p>Choose a playlist</p> : <div></div>}
+                        {mySelectedPlaylist.usersPlaylists !== undefined ?
+                            mySelectedPlaylist.usersPlaylists.Playlists.map((playlist) => (
+
+
+                                    <button value={playlist.id} key={playlist.id} onClick={handlePlaylistClick} >
+                                        {playlist.name}
+                                    </button>
+
+                                )
+                            )
+                            :
+                            <li>Create some playlists!</li> }
                 </div>
             )}
             <div className="playlist">

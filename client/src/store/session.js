@@ -1,4 +1,6 @@
 import { csrfFetch } from './csrf';
+import {getUserPlaylist} from "./playlist";
+import {getUsersTracks} from "./track";
 
 /*
 ==============================
@@ -39,7 +41,13 @@ export const restoreUser = () => async dispatch => {
     console.log("RESTORE USER DATA IS: ")
     console.log(data);
 
+    //TODO Add Demo User
+    if (data.length > 0){
+        dispatch(getUserPlaylist(data.user.id))
+        dispatch(getUsersTracks(data.user.id))
+    }
     dispatch(storeUser(data.user));
+
     return response;
 };
 //Thunk Creator                                            //Thunk
