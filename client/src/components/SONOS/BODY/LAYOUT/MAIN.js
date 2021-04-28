@@ -7,23 +7,27 @@ import Waveform from "../ELEMENTS/WAVEFORM";
 import PlayList from "../ELEMENTS/PLAYLIST";
 import React, {useState, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getUsersTracks} from "../../../../store/track";
+import {getRandomTrack, getUsersTracks} from "../../../../store/track";
 import {getUserPlaylist} from "../../../../store/playlist";
 
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 export default function BODY__CONTENT___MAIN(){
+
+
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const userTrackList = useSelector(state => state.tracks.userTracks);
-    const [userTracks, setUserTracks] = useState([]);
+    const randomTracks = useSelector(state => state.tracks.randTracks);
     const [selectedPlaylist, setSelectedPlaylist] = useState([])
 
+
     useEffect(() => {
-        if (sessionUser){
+        if (sessionUser) {
             dispatch(getUsersTracks(sessionUser.id))
             dispatch(getUserPlaylist(sessionUser.id))
         }
+
     }, [dispatch])
 
     useEffect(() => {
@@ -31,7 +35,7 @@ export default function BODY__CONTENT___MAIN(){
             // @ts-ignore
             const newPlaylist = []
             console.log(userTrackList.length);
-            userTrackList.forEach((track, index) => {
+            userTrackList.forEach((track) => {
                 newPlaylist.push({
                     id: track.id,
                     title: track.trackName,
@@ -46,18 +50,15 @@ export default function BODY__CONTENT___MAIN(){
 
 
 
-    const testTracks = [
-        {
-            id: 0,
-            title: "Deinde",
-            url: "/audio/deinde.mp3"
-        },
-        {
-            id: 1,
-            title: "Hearth & Heaven",
-            url: "/audio/hearth.mp3"
-        }
-    ];
+
+
+    const testTracks = [{
+        id: 15,
+        title: "test",
+        url: "https://sonos-app.s3.amazonaws.com/1619576725478.mp3"
+    }]
+
+
 
     // console.log(testUserPlayList);
 

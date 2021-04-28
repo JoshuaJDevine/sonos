@@ -1,5 +1,6 @@
 .playlist {
     display: flex;
+    flex-wrap: wrap;
     text-align: left;
     border-top: 1px solid rgba(0, 0, 0, 0.2);
     align-items: center;

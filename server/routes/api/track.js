@@ -3,9 +3,11 @@
 ||INIT-----------------||
 \\=====================//
  */
+
 const express = require('express')
 const asyncHandler = require('express-async-handler');
 const queries = require("../../utils/queries");
+const {Sequelize} = require("sequelize");
 const {singlePublicFileUpload} = require("../../awsS3");
 const {singleMulterUpload} = require("../../awsS3");
 const { Track } = require('../../db/models');
@@ -82,7 +84,35 @@ router.post('/:trackId/:userId/like',  asyncHandler(async (req, res) => {
         );
     }
 ))
+router.get('/random', asyncHandler(async (req, res) => {
+    let count;
 
+    await Track.count().then(c => {
+        console.log("There are " + c + " tracks!");
+        count = c + 9;
+    })
+
+
+
+    let randNums = []
+    for (let i = 0; i < 10; i++) {
+        let rand = Math.floor(Math.random() * count);
+        while (randNums.includes(rand)){
+            rand = Math.floor(Math.random() * count);
+        }
+        randNums.push(rand);
+    }
+    console.log(randNums);
+   const randTracks = await Track.findAll({
+       where: {
+           id: randNums
+       }
+   });
+
+    return res.json(
+        {randTracks}
+    );
+}))
 
 /*
 //=====================\\

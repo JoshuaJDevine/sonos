@@ -35,15 +35,17 @@ const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
         <div className='SONOS__PLAYLIST'>
             {dropDownOpen && (
                 <div className="SONOS__PLAYLIST___DROPDOWN">
-                    {mySelectedPlaylist.usersPlaylists !== undefined ?  <p>Choose a playlist</p> : <div></div>}
+                    {mySelectedPlaylist.usersPlaylists !== undefined ?
+                        <p>Choose a playlist</p>
+                        :
+                        <div>
+                        </div>
+                    }
                         {mySelectedPlaylist.usersPlaylists !== undefined ?
                             mySelectedPlaylist.usersPlaylists.Playlists.map((playlist) => (
-
-
                                     <button value={playlist.id} key={playlist.id} onClick={handlePlaylistClick} >
                                         {playlist.name}
                                     </button>
-
                                 )
                             )
                             :
