@@ -36,7 +36,7 @@ export default function BODY__CONTENT___TOPNAV(){
     // @ts-ignore
     return(
         <div className={'BODY__CONTENT___TOPNAV ' + theme}>
-            <img id='nav-logo' src="/logo_basic_lc.png" alt='sonos_logo'/>
+            <img id='nav-logo' src="/logo_orange.png" alt='sonos_logo'/>
 
             <Link to ='/home'>
                 <button>

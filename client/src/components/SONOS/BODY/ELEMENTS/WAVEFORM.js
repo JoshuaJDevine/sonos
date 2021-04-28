@@ -22,8 +22,8 @@ const formWaveSurferOptions = ref => ({
     waveColor: "#787878",
     progressColor: "OrangeRed",
     cursorColor: "OrangeRed",
-    barWidth: 2,
-    barRadius: 1,
+    barWidth: 5,
+    barRadius: 3,
     responsive: true,
     height: 150,
     // If true, normalize by the maximum peak instead of 1.0.

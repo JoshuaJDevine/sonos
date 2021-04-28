@@ -14,8 +14,6 @@ export default function BODY__CONTENT(){
                     <BODY__LAYOUT___TOPNAV />
                     {/*<BODY__LAYOUT___SUBNAV />*/}
                     <BODY__LAYOUT___MAIN />
-                    <BODY__LAYOUT___RIGHTNAV />
-                    <BODY__LAYOUT___BOTNAV />
                 </div>
     )
 }

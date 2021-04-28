@@ -30,32 +30,32 @@ const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
 
     return (
         <div className='SONOS__PLAYLIST'>
-            {dropDownOpen && (
-                <div className="SONOS__PLAYLIST___DROPDOWN">
-                    {mySelectedPlaylist.usersPlaylists !== undefined ?
-                        <p>Choose a playlist</p>
-                        :
-                        <div>
-                        </div>
-                    }
-                        {mySelectedPlaylist.usersPlaylists !== undefined ?
-                            mySelectedPlaylist.usersPlaylists.Playlists.map((playlist) => (
-                                    <button value={playlist.id} key={playlist.id} onClick={handlePlaylistClick} >
-                                        {playlist.name}
-                                    </button>
-                                )
-                            )
-                            :
-                            <li>Create some playlists!</li> }
-                </div>
-            )}
+            {/*{dropDownOpen && (*/}
+            {/*    <div className="SONOS__PLAYLIST___DROPDOWN">*/}
+            {/*        {mySelectedPlaylist.usersPlaylists !== undefined ?*/}
+            {/*            <p>Choose a playlist</p>*/}
+            {/*            :*/}
+            {/*            <div>*/}
+            {/*            </div>*/}
+            {/*        }*/}
+            {/*            {mySelectedPlaylist.usersPlaylists !== undefined ?*/}
+            {/*                mySelectedPlaylist.usersPlaylists.Playlists.map((playlist) => (*/}
+            {/*                        <button value={playlist.id} key={playlist.id} onClick={handlePlaylistClick} >*/}
+            {/*                            {playlist.name}*/}
+            {/*                        </button>*/}
+            {/*                    )*/}
+            {/*                )*/}
+            {/*                :*/}
+            {/*                <li>Create some playlists!</li> }*/}
+            {/*    </div>*/}
+            {/*)}*/}
             <div className="playlist">
-                <button type="button" className="button" onClick={handleDropdownClick}>
-                    ☰
-                </button>
-                <div className='SONOS__PLAYLIST___SELECTOR'>
+                {/*<button type="button" className="button" onClick={handleDropdownClick}>*/}
+                {/*    ☰*/}
+                {/*</button>*/}
+                {/*<div className='SONOS__PLAYLIST___SELECTOR'>*/}
 
-                </div>
+                {/*</div>*/}
                 {/* eslint-disable-next-line react/prop-types */}
                 {tracks.map((track) => (
                     <div

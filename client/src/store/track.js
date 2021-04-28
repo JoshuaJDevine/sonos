@@ -63,7 +63,7 @@ export const getUsersTracks = (userData) => async (dispatch) => {
 
     const serverRes = await res.json();
     dispatch(storeUserTracks(serverRes.User.Tracks))
-    return res;
+    return serverRes.User.Tracks;
 }
 
 export const getRandomTrack = () => async (dispatch) => {
@@ -114,13 +114,13 @@ const trackReducer = (state = initialState, action) => {
         case STORE_NEWTRACK:
             return { ...state, newTrack: action.payload };
         case STORE_USERTRACKS:
-            return { ...state, userTracks: action.payload}
+            return { userTracks: action.payload}
         // case REMOVE_USER:
         //     newState = Object.assign({}, state);
         //     newState.user = null;
         //     return newState;
         case STORE_RANDOMTRACK:
-            return { ...state, randTracks: action.payload}
+            return {  randTracks: action.payload}
         case REMOVE_TRACKS:
             newState = Object.assign({}, state);
             newState.userTracks = null;

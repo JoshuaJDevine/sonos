@@ -27,15 +27,44 @@
     display: flex;
 }
 
-.SONOS__PLAYLIST___DROPDOWN {
-    margin: auto;
-    width: 300px;
-    z-index: 2;
-    border: 1px solid rgba(0, 0, 0, 0.04);
+.SONOS__PLAYLIST___MAINMENU {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 30px;
+
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
     box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
     transition:all 0.3s ease;
 }
+.SONOS__PLAYLIST___MAINMENU.light{
+    border-bottom: 1px solid var(--background-color--accent2---light);
 
+}
+.SONOS__PLAYLIST___MAINMENU.dark{
+    border-bottom: 1px solid var(--background-color--accent2---dark);
+}
+.SONOS__PLAYLIST___SUBMENU {
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    min-height: 30px;
+
+    display: flex;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
+    transition:all 0.3s ease;
+}
+.SONOS__PLAYLIST___SUBMENU.light{
+    border-bottom: 1px solid var(--background-color--accent2---light);
+
+}
+.SONOS__PLAYLIST___SUBMENU.dark{
+    border-bottom: 1px solid var(--background-color--accent2---dark);
+}
 
 .SONOS__PLAYLIST button {
 

@@ -11,10 +11,19 @@
 
 .BODY__CONTENT___TOPNAV.Light {
     background-color: var(--background-color--main---light);
+    border-bottom: 1px solid var(--background-color--accent2---light);
+
 }
 
 .BODY__CONTENT___TOPNAV.Dark {
     background-color: var(--background-color--main---dark);
+    border-bottom: 1px solid var(--background-color--accent2---dark);
+
+}
+
+.BODY__CONTENT___TOPNAV img{
+    width: 100%;
+    height: 100%;
 }
 
 #userProfileImg{

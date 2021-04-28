@@ -1,3 +1,21 @@
+.BODY__CONTENT___MAIN {
+    padding-top: 20px;
+}
+
+.BODY__CONTENT___MAIN light {
+    background-color: var(--background-color--main---light);
+}
+
+.BODY__CONTENT___MAIN dark {
+    background-color: var(--background-color--main---dark);
+}
+
 .BODY__CONTENT___MAIN h3{
 
+}
+
+#main_header {
+    border-radius: 15px;
+    width: 80%;
+    height: 100%;
 }
