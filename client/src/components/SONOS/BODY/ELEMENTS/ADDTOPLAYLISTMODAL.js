@@ -9,7 +9,7 @@ function BODY__ADDTOPLAYLISTMODAL({trackId}) {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>NEW PLAYLIST</button>
+            <button onClick={() => setShowModal(true)}>+</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
                     <BODY__ELEMENTS___ADDTOPLAYLISTFORM setShowModal={setShowModal} trackId={trackId}/>

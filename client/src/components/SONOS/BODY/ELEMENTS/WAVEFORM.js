@@ -18,22 +18,8 @@ import {getUsersTracks} from "../../../../store/track";
 import * as trackActions from "../../../../store/track";
 import ADDTOPLAYLISTMODAL from "./ADDTOPLAYLISTMODAL";
 
-// @ts-ignore
-const formWaveSurferOptions = ref => ({
-    container: ref,
-    waveColor: "#787878",
-    progressColor: "OrangeRed",
-    cursorColor: "OrangeRed",
-    barWidth: 5,
-    barRadius: 3,
-    responsive: true,
-    height: 150,
-    // If true, normalize by the maximum peak instead of 1.0.
-    normalize: true,
-    // Use the PeakCache to improve rendering speed of large waveforms.
-    partialRender: true,
-    xhr: "no-cors"
-});
+import {Theme, useColor, useSize, useTheme} from '../../../../context/ThemeContext';
+
 
 
 
@@ -53,12 +39,37 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
 
 
 
+
+
+    const { color, setColor} = useColor();
+    const { size, setSize} = useSize();
+// @ts-ignore
+    const formWaveSurferOptions = ref => ({
+        container: ref,
+        waveColor: "#787878",
+        progressColor: color,
+        cursorColor: color,
+        barWidth: size*2,
+        barRadius: size,
+        responsive: true,
+        height: 150,
+        // If true, normalize by the maximum peak instead of 1.0.
+        normalize: true,
+        // Use the PeakCache to improve rendering speed of large waveforms.
+        partialRender: true,
+        xhr: "no-cors"
+    });
+
+
+
+
     // create new WaveSurfer instance
     // On component mount and when trackURL changes
     useEffect(() => {
         setPlay(false);
         setWaveformReady(false);
         dispatch(getTracksComments(trackId));
+
 
         const options = formWaveSurferOptions(waveformRef.current)
 
@@ -88,6 +99,7 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
         }
 
     }, [url]);
+
 
     const handlePlayPause = () => {
         setPlay(!playing);
