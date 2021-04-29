@@ -5,7 +5,6 @@ import {Theme, useTheme} from "../context/ThemeContext";
 export default function SONOS(){
     const { theme, setTheme} = useTheme();
 
-
     return(
 
         <div className={'SONOS ' + theme} >

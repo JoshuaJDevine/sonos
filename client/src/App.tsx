@@ -24,14 +24,11 @@ function App() {
     //theme slice of state
     const [theme, setTheme] = React.useState(Theme.Dark);
 
-
     const dispatch = useDispatch();
     const [isLoaded, setIsLoaded] = useState(false);
     useEffect(() => {
-        console.log("APP RESTORING USER")
         dispatch(sessionActions.restoreUser()).then(() => {
             setIsLoaded(true)
-            console.log("APP FINISHED LOADING USER")
         });
     }, [dispatch]);
 

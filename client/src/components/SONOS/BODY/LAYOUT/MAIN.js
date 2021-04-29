@@ -13,11 +13,9 @@ import './MAIN.css'
 import {Redirect} from "react-router-dom";
 import {useTheme} from "../../../../context/ThemeContext";
 import NEWPLAYLISTFORMMODAL from "../ELEMENTS/NEWPLAYLISTFORMMODAL";
-// @ts-ignore
-// eslint-disable-next-line react/prop-types
-// @ts-ignore
+
 export default function BODY__CONTENT___MAIN(){
-    const { theme, setTheme} = useTheme();
+    const { theme } = useTheme();
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const userTrackList = useSelector(state => state.tracks.userTracks);
@@ -92,11 +90,7 @@ export default function BODY__CONTENT___MAIN(){
     const handleSubMenuView = (e) => {
         setShowSubMenu(!showSubMenu);
     }
-    //
-    // console.log("MYSELECTED PLAYLIST IS");
-    // console.log(myPlaylists);
-    // console.log("SELECTED PLAYLIST IS");
-    // console.log(selectedPlaylist);
+
     if (!sessionUser){
         return <Redirect to='/' />
     }

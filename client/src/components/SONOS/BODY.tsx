@@ -8,11 +8,10 @@ import BODY__SPLASH from "./BODY/SPLASH";
 import BODY__CONTENT___TOPNAV from "./BODY/LAYOUT/TOPNAV";
 import {useTheme} from "../../context/ThemeContext";
 import BODY__CONTENT___PROFILE from "./BODY/ELEMENTS/PROFILE";
-import {useSelector} from "react-redux";
 
 
 export default function BODY(){
-    const { theme, setTheme} = useTheme();
+    const { theme} = useTheme();
 
     return (
         <div className={'BODY ' + theme}>

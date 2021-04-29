@@ -12,10 +12,6 @@ import SIGNUPFORMMODAL from "../ELEMENTS/SIGNUPFORMMODAL";
 
 
 export default function BODY__CONTENT___TOPNAV(){
-    // console.log("-----TOPNAV COMPONENT LOADING");
-    // useEffect(() =>{
-    //     console.log("-----TOPNAV USEEFFECT RUNNING");
-    // })
     const { theme, setTheme} = useTheme();
     const sessionUser = useSelector(state => state.session.user);
     const dispatch = useDispatch();
@@ -33,7 +29,6 @@ export default function BODY__CONTENT___TOPNAV(){
             setTheme(Theme.Dark)
         }
     }
-    // @ts-ignore
     return(
         <div className={'BODY__CONTENT___TOPNAV ' + theme}>
             <img id='nav-logo' src="/logo_orange.png" alt='sonos_logo'/>
@@ -55,7 +50,6 @@ export default function BODY__CONTENT___TOPNAV(){
 
             {/*Maybe revisit this feature?*/}
             {/*<input className='SearchBar' type="text" placeholder="Search.." name="search" />*/}
-
             {sessionUser ?
                 <>
                     <Link to='/profile'>
@@ -77,51 +71,47 @@ export default function BODY__CONTENT___TOPNAV(){
         </div>
     )
 }
-
-function manageSessionButtons(sessionUser, dispatch){
-    const handleLogout = function (){
-        console.log("logging out user");
-        dispatch(sessionActions.logout());
-        return <Redirect to='/home' />
-    }
-
-    // if (sessionUser){
-    //     console.log(sessionUser.profileImageUrl);
-    // }
-
-    if (!sessionUser){
-        return (
-            <>
-                <Link to='/login'>
-                    <button>
-                        Log in
-                    </button>
-                </Link>
-
-                <Link to='/signup'>
-                    <button>
-                        Sign up
-                    </button>
-                </Link>
-            </>
-        )
-    }
-    else {
-        return (
-            <>
-                <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>
-                <Link to='/profile'>
-                    <button>
-                        Profile
-                    </button>
-                </Link>
-
-                <button
-                    onClick={handleLogout}
-                >
-                    Logout
-                </button>
-            </>
-        )
-    }
-}
+//
+// function manageSessionButtons(sessionUser, dispatch){
+//     const handleLogout = function (){
+//         console.log("logging out user");
+//         dispatch(sessionActions.logout());
+//         return <Redirect to='/home' />
+//     }
+//
+//     if (!sessionUser){
+//         return (
+//             <>
+//                 <Link to='/login'>
+//                     <button>
+//                         Log in
+//                     </button>
+//                 </Link>
+//
+//                 <Link to='/signup'>
+//                     <button>
+//                         Sign up
+//                     </button>
+//                 </Link>
+//             </>
+//         )
+//     }
+//     else {
+//         return (
+//             <>
+//                 <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>
+//                 <Link to='/profile'>
+//                     <button>
+//                         Profile
+//                     </button>
+//                 </Link>
+//
+//                 <button
+//                     onClick={handleLogout}
+//                 >
+//                     Logout
+//                 </button>
+//             </>
+//         )
+//     }
+// }
