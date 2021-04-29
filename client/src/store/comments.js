@@ -27,7 +27,7 @@ export const getTracksComments = (trackId) => async (dispatch) => {
         dispatch(storeTrackComments(serverRes.comments.Comments))
     }
     else {
-        console.log("DISPATRCH EMPTY ARRAY")
+        // console.log("DISPATRCH EMPTY ARRAY")
         dispatch(storeTrackComments([]))
     }
     return res;

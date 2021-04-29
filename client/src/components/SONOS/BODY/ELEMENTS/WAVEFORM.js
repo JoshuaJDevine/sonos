@@ -16,6 +16,7 @@ import {Link, Redirect} from "react-router-dom";
 import {getUserPlaylist} from "../../../../store/playlist";
 import {getUsersTracks} from "../../../../store/track";
 import * as trackActions from "../../../../store/track";
+import ADDTOPLAYLISTMODAL from "./ADDTOPLAYLISTMODAL";
 
 // @ts-ignore
 const formWaveSurferOptions = ref => ({
@@ -157,9 +158,7 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
         }
     }
 
-    const addTrackToPlaylist = () => {
-        dispatch(trackActions.AddNewTrackToPlaylist({trackId: trackId, playlistId: activePlaylistId, userId: sessionUser.id}))
-    }
+
 
     return (
         <div className='SONOS__WAVEFORM___WRAPPER'>
@@ -170,7 +169,7 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
             {waveformReady ?
                 <div className="controls">
                     <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
-                    <button onClick={addTrackToPlaylist}>{" + "}</button>
+                    <ADDTOPLAYLISTMODAL trackId={trackId}/>
                     <input
                         className='SONOS__VOLUMESLIDER'
                         type="range"
