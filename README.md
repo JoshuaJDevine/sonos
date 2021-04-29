@@ -1,13 +1,5 @@
-sonos
 
-
-
-
-
-
-
-
-# SoundTrack
+# Sonos
 
 An experimental ambient music generator
 
