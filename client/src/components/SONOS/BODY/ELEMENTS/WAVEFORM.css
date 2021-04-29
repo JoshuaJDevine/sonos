@@ -76,3 +76,7 @@
 .SONOS__COMMENTSMENU{
 
 }
+
+.SONOS__COMMENTINPUT{
+    border-radius: 8px;
+}

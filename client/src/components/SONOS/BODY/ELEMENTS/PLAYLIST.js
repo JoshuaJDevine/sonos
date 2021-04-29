@@ -12,9 +12,6 @@ const PlayList = ({ tracks, selectedTrack, setSelectedTrack }) => {
     const mySelectedPlaylist = useSelector(state => state.playlists.playlists)
     const { theme, setTheme} = useTheme();
 
-
-
-
     const handleShowTracks = () => {
         setShowTracks(!showTracks);
     };

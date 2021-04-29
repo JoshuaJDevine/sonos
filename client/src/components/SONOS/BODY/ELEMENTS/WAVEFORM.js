@@ -15,6 +15,7 @@ import * as sessionActions from "../../../../store/session";
 import {Link, Redirect} from "react-router-dom";
 import {getUserPlaylist} from "../../../../store/playlist";
 import {getUsersTracks} from "../../../../store/track";
+import * as trackActions from "../../../../store/track";
 
 // @ts-ignore
 const formWaveSurferOptions = ref => ({
@@ -35,16 +36,8 @@ const formWaveSurferOptions = ref => ({
 
 
 
-export default function Waveform({ url, trackId }) {
-    // console.log("-----WAVEFORM COMPONENT LOADING");
-    // useEffect(() =>{
-    //     console.log("-----WAVEFORM USEEFFECT RUNNING");
-    // })
-
+export default function Waveform({ url, trackId, activePlaylistId }) {
     const dispatch = useDispatch();
-    // dispatch(getTracksComments(trackId));
-
-
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);
     const [playing, setPlay] = useState(false);
@@ -66,7 +59,6 @@ export default function Waveform({ url, trackId }) {
         setWaveformReady(false);
         dispatch(getTracksComments(trackId));
 
-
         const options = formWaveSurferOptions(waveformRef.current)
 
         // console.log("Prepping load Wavesurfer");
@@ -79,7 +71,6 @@ export default function Waveform({ url, trackId }) {
 
         wavesurfer.current.on("ready", function() {
             // https://wavesurfer-js.org/docs/methods.html
-            // make sure object stillavailable when file loaded
             if (wavesurfer.current) {
                 wavesurfer.current.setVolume(volume);
                 setVolume(volume);
@@ -91,7 +82,7 @@ export default function Waveform({ url, trackId }) {
         // Removes events, elements and disconnects Web Audio nodes.
         // when component unmount
         return () => {
-            console.log("-----WAVEFORM CLEANING UP");
+            // console.log("-----WAVEFORM CLEANING UP");
             wavesurfer.current.destroy();
         }
 
@@ -166,6 +157,10 @@ export default function Waveform({ url, trackId }) {
         }
     }
 
+    const addTrackToPlaylist = () => {
+        dispatch(trackActions.AddNewTrackToPlaylist({trackId: trackId, playlistId: activePlaylistId, userId: sessionUser.id}))
+    }
+
     return (
         <div className='SONOS__WAVEFORM___WRAPPER'>
             <div className='WaveformLoader'>
@@ -174,34 +169,35 @@ export default function Waveform({ url, trackId }) {
             <div id="waveform" ref={waveformRef} />
             {waveformReady ?
                 <div className="controls">
-                <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
-                <input
-                    className='SONOS__VOLUMESLIDER'
-                    type="range"
-                    id="volume"
-                    name="volume"
-                    // waveSurfer recognize value of `0` same as `1`
-                    //  so we need to set some zero-ish value for silence
-                    min="0.01"
-                    max="1"
-                    step=".025"
-                    onChange={onVolumeChange}
-                    defaultValue={volume}
-                />
-                <input
-                    maxLength="20" //TODO style and UX
-                    placeholder='Leave a comment'
-                    type="text"
-                    id="myComment"
-                    name="myComment"
-                    className='SONOS__COMMENTINPUT'
-                    onChange={handleComment}
-                    value={comment}
-                />
-                <button onClick={submitComment}>{"COMMENT"}</button>
-                <div className='LikeHolder'>
-                    {waveformReady ? <img className={`SONOS__TRACKLIKE ${trackLikeStatus ? "like" : "unlike"}`} src='/img/sonos_star_bl.png' onClick={handleLike}></img>: ""}
-                </div>
+                    <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
+                    <button onClick={addTrackToPlaylist}>{" + "}</button>
+                    <input
+                        className='SONOS__VOLUMESLIDER'
+                        type="range"
+                        id="volume"
+                        name="volume"
+                        // waveSurfer recognize value of `0` same as `1`
+                        //  so we need to set some zero-ish value for silence
+                        min="0.01"
+                        max="1"
+                        step=".025"
+                        onChange={onVolumeChange}
+                        defaultValue={volume}
+                    />
+                    <input
+                        maxLength="20" //TODO style and UX
+                        placeholder='Leave a comment'
+                        type="text"
+                        id="myComment"
+                        name="myComment"
+                        className='SONOS__COMMENTINPUT'
+                        onChange={handleComment}
+                        value={comment}
+                    />
+                    <button onClick={submitComment}>{"COMMENT"}</button>
+                    <div className='LikeHolder'>
+                        {waveformReady ? <img className={`SONOS__TRACKLIKE ${trackLikeStatus ? "like" : "unlike"}`} src='/img/sonos_star_bl.png' onClick={handleLike}></img>: ""}
+                    </div>
             </div> : ""
             }
             <div className='SONOS__COMMENTBOX'>

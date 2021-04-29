@@ -23,10 +23,32 @@ export const getUserPlaylist = (userId) => async (dispatch) => {
         method: 'GET',
     });
     const serverRes = await res.json();
-    // console.log("234234324324234324324324324324")
-    // console.log(serverRes)
-    // console.log(res);
+
     dispatch(storeUserPlaylist(serverRes))
+
+    return res;
+}
+
+
+
+/*
+==============================
+CREATE PLAYLIST FOR USER
+==============================
+*/
+//Thunk Creator                                                   //Thunk
+export const createUserPlaylist = (data) => async (dispatch) => {
+    const res = await csrfFetch(`/api/playlist/`, {
+        method: 'POST',
+        body: JSON.stringify( {
+            name: data.name,
+            isPrivate: data.isPrivate,
+            userId: data.userId
+        }
+        )
+    });
+    const serverRes = await res.json();
+    dispatch(getUserPlaylist(data.userId))
 
     return res;
 }

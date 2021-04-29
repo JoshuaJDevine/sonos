@@ -1,4 +1,5 @@
 import { csrfFetch } from './csrf';
+import {getUserPlaylist} from "./playlist";
 
 /*
 ==============================
@@ -45,13 +46,13 @@ GET USERS TRACKS
 const STORE_USERTRACKS = 'track/storeUserTracks';
 const STORE_RANDOMTRACK = 'track/storeRandomTracks'
 //Action Creator
-const storeUserTracks = (tracks) => {
+export const storeUserTracks = (tracks) => {
     return {
         type: STORE_USERTRACKS,
         payload: tracks,
     }
 }
-const storeRandomTracks = (tracks) => {
+export const storeRandomTracks = (tracks) => {
     return {
         type: STORE_RANDOMTRACK,
         payload: tracks,
@@ -66,6 +67,20 @@ export const getUsersTracks = (userData) => async (dispatch) => {
     return serverRes.User.Tracks;
 }
 
+export const AddNewTrackToPlaylist = (data) => async  (dispatch) => {
+    console.log("//TODO ADD TRACK", data.trackId, "TO PLAYLIST", data.playlistId);
+
+
+    const res = await csrfFetch(`/api/playlist/addTrack/${data.trackId}/${data.playlistId}`, {
+        method: "POST",
+    });
+    const serverRes = await res.json();
+
+    dispatch(getUserPlaylist(data.userId))
+
+    return serverRes;
+}
+
 export const getRandomTrack = () => async (dispatch) => {
     const res = await csrfFetch(`/api/track/random`);
     const serverRes = await res.json();
@@ -73,6 +88,11 @@ export const getRandomTrack = () => async (dispatch) => {
     dispatch(storeRandomTracks(serverRes.randTracks))
     return res;
 }
+
+// export const getRandomTrack = () => async (dispatch) => {
+//
+// }
+
 
 
 

@@ -44,26 +44,25 @@ export default function BODY__CONTENT___TOPNAV(){
                 </button>
             </Link>
 
+            {/*WIP -> Some kind of Searchable DB for users?*/}
             <button>
                 Library
             </button>
 
-            <input className='SearchBar' type="text" placeholder="Search.." name="search" />
+            <button onClick={ChangeTheme}>
+                { theme }
+            </button>
 
-
-
-
-
+            {/*Maybe revisit this feature?*/}
+            {/*<input className='SearchBar' type="text" placeholder="Search.." name="search" />*/}
 
             {sessionUser ?
                 <>
                     <Link to='/profile'>
                         <button>Profile</button>
                     </Link>
-
-                    <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>
-
                     <button onClick={handleLogout}>Logout</button>
+                    <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>
                 </>
                 :
                 <>
@@ -74,9 +73,6 @@ export default function BODY__CONTENT___TOPNAV(){
                 </>
             }
 
-            <button onClick={ChangeTheme}>
-                { theme }
-            </button>
 
         </div>
     )

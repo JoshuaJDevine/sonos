@@ -9,10 +9,10 @@ import React, {useState, useEffect} from "react";
 import { useSelector, useDispatch} from "react-redux";
 import * as trackActions from "../../../../store/track";
 
-
 import './MAIN.css'
 import {Redirect} from "react-router-dom";
 import {useTheme} from "../../../../context/ThemeContext";
+import NEWPLAYLISTFORMMODAL from "../ELEMENTS/NEWPLAYLISTFORMMODAL";
 // @ts-ignore
 // eslint-disable-next-line react/prop-types
 // @ts-ignore
@@ -27,8 +27,9 @@ export default function BODY__CONTENT___MAIN(){
     const [mainHeader, setMainHeader] = useState("/header_main_01.png")
     const [showMenu, setShowMenu] = useState(false);
     const [showSubMenu, setShowSubMenu] = useState(false);
+    const [currentActivePlaylistID, setCurrentActivePlaylistID] = useState(10000);
 
-    const mySelectedPlaylist = useSelector(state => state.playlists.playlists)
+    const myPlaylists = useSelector(state => state.playlists.playlists)
 
     useEffect(() => {
         if (userTrackList){
@@ -69,11 +70,9 @@ export default function BODY__CONTENT___MAIN(){
 
 
     const handlePlaylistClick = (e) => {
-        console.log('//todo HANDLE PLAYLIST CLICK');
-        console.log('----------------------------');
-        console.log("For playlist", e.target.value);
-        console.log('----------------------------');
-        console.log('----------------------------');
+        setCurrentActivePlaylistID(myPlaylists.usersPlaylists.Playlists[e.target.value].id);
+        dispatch(trackActions.storeUserTracks(myPlaylists?.usersPlaylists?.Playlists[e.target.value].Tracks))
+        setSelectedPlaylist(myPlaylists.usersPlaylists.Playlists[e.target.value]);
     }
 
     const handleDiscover = (e) => {
@@ -87,10 +86,6 @@ export default function BODY__CONTENT___MAIN(){
         dispatch(trackActions.getUsersTracks(sessionUser.id)).then((res)=> {console.log(res)});
     }
 
-    const handleMyTracks = (e) => {
-        console.log('//Get 10 random tracks!')
-    }
-
     const handleMenuView = (e) => {
         setShowMenu(!showMenu);
     }
@@ -98,8 +93,8 @@ export default function BODY__CONTENT___MAIN(){
         setShowSubMenu(!showSubMenu);
     }
     //
-    // console.log("SELECTED TRACK IS");
-    // console.log(selectedTrack);
+    // console.log("MYSELECTED PLAYLIST IS");
+    // console.log(myPlaylists);
     // console.log("SELECTED PLAYLIST IS");
     // console.log(selectedPlaylist);
     if (!sessionUser){
@@ -118,19 +113,20 @@ export default function BODY__CONTENT___MAIN(){
                         <>
                             <button onClick={handleDiscover}>DISCOVER</button>
                             <button onClick={handleCreateNewPlaylist}>MY TRACKS</button>
-                            <button onClick={handleMyTracks}>NEW PLAYLIST</button>
+                            <NEWPLAYLISTFORMMODAL />
                         </>
                             : <></>}
 
                     </div>
-                    <div className={mySelectedPlaylist.usersPlaylists !== undefined && mySelectedPlaylist?.usersPlaylists?.Playlists?.length > 0 ?
+                    {/*Map user playlists*/}
+                    <div className={myPlaylists.usersPlaylists !== undefined && myPlaylists?.usersPlaylists?.Playlists?.length > 0 ?
                         "SONOS__PLAYLIST___SUBMENU" : "SONOS__PLAYLIST___SUBMENU hidden"}>
                         <button onClick={handleSubMenuView}>{showSubMenu ? "|||" : "PLAYLISTS"}</button>
                         {showSubMenu ?
                             <>
-                                {mySelectedPlaylist.usersPlaylists !== undefined && mySelectedPlaylist?.usersPlaylists?.Playlists?.length > 0 ?
-                                    mySelectedPlaylist.usersPlaylists.Playlists.map((playlist) => (
-                                            <button value={playlist.id} key={playlist.id} onClick={handlePlaylistClick} >
+                                {myPlaylists.usersPlaylists !== undefined && myPlaylists?.usersPlaylists?.Playlists?.length > 0 ?
+                                    myPlaylists.usersPlaylists.Playlists.map((playlist, idx) => (
+                                            <button value={idx} key={playlist.id} onClick={handlePlaylistClick} >
                                                 {playlist.name}
                                             </button>
                                         )
@@ -146,6 +142,7 @@ export default function BODY__CONTENT___MAIN(){
                         }
                     </div>
                 <div>
+                    {/*Send selected Playlist to waveform*/}
                     {selectedPlaylist.length > 0 ?
                         <div>
                             <PlayList
@@ -154,10 +151,13 @@ export default function BODY__CONTENT___MAIN(){
                                 setSelectedTrack={setSelectedTrack}
                                 playlists={selectedPlaylist}
                             />
-                                <Waveform url={selectedTrack.url} trackId={selectedTrack.id} />
+                                <Waveform url={selectedTrack.url} trackId={selectedTrack.id} activePlaylistId={currentActivePlaylistID} />
                         </div>:
                         <div>
-                            <p>Please wait... </p>
+                            <p>There were no tracks in the selected playlist :( </p>
+                            <p>Would you like to discover some?</p>
+                            <button onClick={handleDiscover}>DISCOVER</button>
+
                         </div>
                     }
                 </div>
