@@ -17,6 +17,27 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const newErr = []
+        let regExp = /\.([0-9a-z]+)(?:[\?#]|$)/i;
+        console.log(image.name)
+        console.log(image.size)
+        console.log(image.name.match(regExp))
+
+        if (image.name.match(regExp)[1] != "png"){
+            newErr.push("Please choose a png file")
+        }
+        if (password !== confirmPassword) {
+            newErr.push('Passwords do not match')
+        }
+        if (image.size > 1000000){
+            newErr.push("Please choose a smaller file")
+        }
+
+        setErrors(newErr);
+        if (newErr.length > 0){
+            return
+        }
+
         if (password === confirmPassword) {
             setErrors([]);
             return dispatch(sessionActions.signup({ email, username, password, image }))
@@ -32,9 +53,8 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
                     if (data && data.errors) setErrors(data.errors);
                 });
         }
-        else {
-            setErrors(['Passwords do not match']);
-        }
+
+
     }
 
     const updateFile = (e) => {
@@ -95,6 +115,7 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
                     required
                 />
                 <label htmlFor='imageUpload'>
+                    Profile Image (optional)
                 </label>
                 <input type="file" id='imageUpload' name='imageUpload' onChange={updateFile} />
                 <button type="submit">Sign Up</button>

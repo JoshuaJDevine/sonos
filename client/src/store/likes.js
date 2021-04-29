@@ -37,14 +37,14 @@ export const updateTrackLike = (userId, trackId) => async (dispatch) => {
         method: 'POST'
     });
     const serverRes = await res.json();
-    console.log("====UPDATING TRACK LIKE=====");
-    console.log(serverRes.like);
+    // console.log("====UPDATING TRACK LIKE=====");
+    // console.log(serverRes.like);
     if (serverRes.like === "Destroyed!! What else is there to return? Probably something I don't remember atm..."){
-        console.log("DISPATCHING FALSE");
+        // console.log("DISPATCHING FALSE");
         dispatch(storeTrackLike(false))
     }
     else {
-        console.log("DISPATCHING TRUE");
+        // console.log("DISPATCHING TRUE");
         dispatch(storeTrackLike(true))
     }
     return res;

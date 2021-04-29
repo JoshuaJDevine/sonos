@@ -14,7 +14,7 @@ export default function BODY__ELEMENTS___ADDTOPLAYLISTFORM({setShowModal,trackId
 
 
     const addTrackToPlaylist = (e) => {
-        console.log("add track", trackId, "to playlist", myPlaylists?.usersPlaylists?.Playlists[e.target.value].id)
+        // console.log("add track", trackId, "to playlist", myPlaylists?.usersPlaylists?.Playlists[e.target.value].id)
         dispatch(trackActions.AddNewTrackToPlaylist({
             trackId: trackId,
             playlistId: myPlaylists?.usersPlaylists?.Playlists[e.target.value].id,
@@ -34,7 +34,7 @@ export default function BODY__ELEMENTS___ADDTOPLAYLISTFORM({setShowModal,trackId
                 <>
                     {myPlaylists.usersPlaylists !== undefined && myPlaylists?.usersPlaylists?.Playlists?.length > 0 ?
                         myPlaylists.usersPlaylists.Playlists.map((playlist, idx) => (
-                                <button id={"PlaylistAdd"} value={idx} key={playlist.id} onClick={addTrackToPlaylist} >
+                                <button id={playlist.id} value={idx} key={playlist.id} onClick={addTrackToPlaylist} >
                                     {playlist.name}
                                 </button>
                             )

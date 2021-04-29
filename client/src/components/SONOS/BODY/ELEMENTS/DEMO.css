@@ -1,0 +1,8 @@
+.BODY__ELEMENTS___DEMO{
+    text-align-last: center;
+    padding: 20px;
+}
+.BODY__ELEMENTS___DEMO button{
+    width: 100px;
+    height: 60px;
+}

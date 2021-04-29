@@ -22,7 +22,8 @@ export default function BODY__ELEMENTS___UPLOADFORM(){
         console.log("TO uploadNewTrack")
 
         e.preventDefault();
-        if (trackName.length >= 1 && trackName.length <= 120 && track != null) {
+
+        if (trackName.length >= 3 && trackName.length <= 60 && track != null) {
             setErrors([]);
             return dispatch(trackActions.uploadNewTrack({ trackName, track, userId:sessionUser.id }))
                 .then(() => {
@@ -35,12 +36,19 @@ export default function BODY__ELEMENTS___UPLOADFORM(){
                 });
         }
         else {
-            if (trackName.length >= 1 && trackName.length <= 120 && track){
-                errors.push("Track name must be between 1 and 120 characters long")
+            const newErr = []
+            let regExp = /\.([0-9a-z]+)(?:[\?#]|$)/i;
+            if (trackName.length < 3 || trackName.length > 60 && track){
+                newErr.push("Track name must be between 1 and 60 characters long")
             }
             if (track === null){
-                errors.push("No track selected to upload.")
+                newErr.push("No track selected to upload.")
             }
+            if (track.name.match(regExp)[1] != ".mp3"){
+                newErr.push("Sonos currently only accepts MP3 files.")
+            }
+            setErrors(newErr);
+
         }
     }
 
@@ -62,6 +70,7 @@ export default function BODY__ELEMENTS___UPLOADFORM(){
                     id='trackName'
                     name= 'trackName'
                     type="text"
+
                     value={trackName}
                     onChange={(e) => setTrackName(e.target.value)}
                     required

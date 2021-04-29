@@ -1,5 +1,15 @@
-.BODY__ELEMENTS___NEWPLAYLISTFORM form {
+.BODY__ELEMENTS___NEWPLAYLISTFORM{
+}
+
+.BODY__ELEMENTS___NEWPLAYLISTFORM form  {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+}
+
+.BODY__ELEMENTS___NEWPLAYLISTFORM form button {
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
 }

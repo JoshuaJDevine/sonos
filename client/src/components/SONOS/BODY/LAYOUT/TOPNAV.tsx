@@ -9,6 +9,7 @@ import * as sessionActions from "../../../../store/session";
 import {useDispatch, useSelector} from "react-redux";
 import LOGINFORMMODAL from "../ELEMENTS/LOGINFORMMODAL";
 import SIGNUPFORMMODAL from "../ELEMENTS/SIGNUPFORMMODAL";
+import DEMOMODAL from "../ELEMENTS/DEMOMODAL";
 
 
 export default function BODY__CONTENT___TOPNAV(){
@@ -35,12 +36,12 @@ export default function BODY__CONTENT___TOPNAV(){
     }
     const setWaveFormColor = function () {
         if (color === "#ff4500") {
-            setColor("#001dff")
+            setColor("#3244db")
             setColorDisplayText("Blue")
-        } else if (color === "#001dff") {
-            setColor("#7c00ff")
+        } else if (color === "#3244db") {
+            setColor("#7d4eb8")
             setColorDisplayText("Purple")
-        } else if (color === "#7c00ff") {
+        } else if (color === "#7d4eb8") {
             setColor("#ff4500")
             setColorDisplayText("Orange")
         }
@@ -68,9 +69,7 @@ export default function BODY__CONTENT___TOPNAV(){
             {/*    Library*/}
             {/*</button>*/}
 
-
-
-            {/*Maybe revisit this feature?*/}
+            {/*Revisit this feature?*/}
             {/*<input className='SearchBar' type="text" placeholder="Search.." name="search" />*/}
             {sessionUser ?
                 <>
@@ -92,10 +91,10 @@ export default function BODY__CONTENT___TOPNAV(){
                     </LOGINFORMMODAL>
                     <SIGNUPFORMMODAL>
                     </SIGNUPFORMMODAL>
+                    <DEMOMODAL>
+                    </DEMOMODAL>
                 </>
             }
-
-
         </div>
     )
 }

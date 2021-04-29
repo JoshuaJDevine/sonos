@@ -9,69 +9,39 @@ module.exports = {
         email: 'LudwigB@ArchdukeRudplh.estate',
         username: 'LudwigB',
         hashedPassword: bcrypt.hashSync('DONALDFRANCISTOVEY'),
+        profileImageUrl: "https://sonos-app.s3.us-west-1.amazonaws.com/1619731996559.png",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         email: faker.internet.email(),
-        username: 'iDente',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        username: 'dShostakovich',
+        hashedPassword: bcrypt.hashSync("Rusky"),
+        profileImageUrl: "https://sonos-app.s3.us-west-1.amazonaws.com/1619731788001.png",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         email: faker.internet.email(),
-        username: 'tionRO',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        username: 'Ialbeniz',
+        hashedPassword: bcrypt.hashSync("Topemoff"),
+        profileImageUrl: "https://sonos-app.s3.us-west-1.amazonaws.com/1619731846029.png",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         email: faker.internet.email(),
-        username: 'ophaph',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        username: 'Cdebussy',
+        hashedPassword: bcrypt.hashSync("ViveFrance"),
+        profileImageUrl: "https://sonos-app.s3.us-west-1.amazonaws.com/1619731908519.png",
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         email: faker.internet.email(),
-        username: 'beryac',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        email: faker.internet.email(),
-        username: 'riable',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        email: faker.internet.email(),
-        username: 'aTeNTi',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        email: faker.internet.email(),
-        username: 'SiLenT',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        email: faker.internet.email(),
-        username: 'MaNTre',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        email: faker.internet.email(),
-        username: 'loner',
-        hashedPassword: bcrypt.hashSync(faker.internet.password()),
+        username: 'AmadeusM',
+        hashedPassword: bcrypt.hashSync("FluteForLife"),
+        profileImageUrl: "https://sonos-app.s3.us-west-1.amazonaws.com/1619731961607.png",
         createdAt: new Date(),
         updatedAt: new Date()
       },

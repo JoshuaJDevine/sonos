@@ -13,6 +13,7 @@ import './MAIN.css'
 import {Redirect} from "react-router-dom";
 import {useTheme} from "../../../../context/ThemeContext";
 import NEWPLAYLISTFORMMODAL from "../ELEMENTS/NEWPLAYLISTFORMMODAL";
+import UPLOADFORMMODAL from "../ELEMENTS/UPLOADFORMMODAL";
 
 export default function BODY__CONTENT___MAIN(){
     const { theme } = useTheme();
@@ -23,7 +24,7 @@ export default function BODY__CONTENT___MAIN(){
     const [selectedPlaylist, setSelectedPlaylist] = useState([])
     const [selectedTrack, setSelectedTrack] = useState(userTrackList);
     const [mainHeader, setMainHeader] = useState("/header_main_01.png")
-    const [showMenu, setShowMenu] = useState(false);
+    const [showMenu, setShowMenu] = useState(true);
     const [showSubMenu, setShowSubMenu] = useState(false);
     const [currentActivePlaylistID, setCurrentActivePlaylistID] = useState(10000);
 
@@ -107,6 +108,7 @@ export default function BODY__CONTENT___MAIN(){
                         <>
                             <button onClick={handleDiscover}>DISCOVER</button>
                             <button onClick={handleCreateNewPlaylist}>MY TRACKS</button>
+                            <UPLOADFORMMODAL/>
                             <NEWPLAYLISTFORMMODAL />
                         </>
                             : <></>}
