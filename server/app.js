@@ -15,6 +15,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser');
 const routes = require('./routes');
 const queries = require('./utils/queries.js');
+const db = require('./db/models')
 
 // console.log(queries);
 // console.log(queries.findUserbyID(13).then((res) => {
@@ -24,6 +25,8 @@ const queries = require('./utils/queries.js');
 // queries.findUserTracks(13).then((res) => {
 //     res.Tracks.forEach((el) => {console.log(el.dataValues.url)});
 // });
+
+db.sequelize.sync();
 
 //Determine environment
 const { environment } = require('./config');

@@ -88,14 +88,14 @@ router.get('/random', asyncHandler(async (req, res) => {
     let count;
 
     await Track.count().then(c => {
-        console.log("There are " + c + " tracks!");
-        count = c + 9;
+        // console.log("There are " + c + " tracks!");
+        count = c+1;
     })
 
 
 
     let randNums = []
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 7; i++) {
         let rand = Math.floor(Math.random() * count);
         while (randNums.includes(rand)){
             rand = Math.floor(Math.random() * count);
