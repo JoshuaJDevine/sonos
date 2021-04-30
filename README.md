@@ -14,7 +14,7 @@ Help the shape development by sending your feedback or requesting access to the 
 
 
 # Technologies 
-JS, JSX, Typescript, Node, Express, React, Redux, HTML5, CSS3
+JS, JSX, Typescript, Node, Express, React, Redux, HTML5, CSS3, Wavesurfer
 
 
 # Features coming soon
