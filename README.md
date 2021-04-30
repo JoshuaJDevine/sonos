@@ -8,7 +8,7 @@ Sonos is currently under active development. Check back soon for more features a
 You can try out the demo version @
 https://sonos-app.herokuapp.com/
 
-Help the shape the development by sending your feedback to sonosmusicapp@gmail.com
+Help the shape development by sending your feedback or requesting access to the repo sonosmusicapp@gmail.com
 
 
 # Technologies 
