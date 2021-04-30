@@ -20,12 +20,20 @@ export type ThemeContextWFSize = {
     setSize: any;
 }
 
+export type ThemeContextAutoPlay = {
+    autoPlay: any;
+    setAutoPlay: any;
+}
+
 export const ThemeContext = createContext<ThemeContextType>({ theme: Theme.Dark, setTheme: theme => console.warn('no theme provider')});
 // @ts-ignore
 export const WFColorContext = createContext<ThemeContextWFColor>({color: "#ff4500", setColor: color => console.warn("no theme provider") });
 // @ts-ignore
 export const WFSize = createContext<ThemeContextWFSize>({size: 2, setSize: size => console.warn("no theme provider") });
+// @ts-ignore
+export const WFAutoPlay = createContext<ThemeContextAutoPlay>({autoPlay: true, setAutoPlay: autoPlay => console.warn("no theme provider") });
 
 export const useTheme = () => useContext(ThemeContext);
 export const useColor = () => useContext(WFColorContext);
 export const useSize = () => useContext(WFSize);
+export const userAutoPlay = () => useContext(WFAutoPlay);

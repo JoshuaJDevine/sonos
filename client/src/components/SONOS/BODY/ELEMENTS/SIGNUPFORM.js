@@ -19,19 +19,20 @@ export default function BODY__ELEMENTS___SIGNUPFORM(){
         e.preventDefault();
         const newErr = []
         let regExp = /\.([0-9a-z]+)(?:[\?#]|$)/i;
-        console.log(image.name)
-        console.log(image.size)
-        console.log(image.name.match(regExp))
 
-        if (image.name.match(regExp)[1] != "png"){
-            newErr.push("Please choose a png file")
+        if (image){
+            if (image?.name?.match(regExp)[1] != "png"){
+                newErr.push("Please choose a png file")
+            }
+            if (image?.size > 1000000){
+                newErr.push("Please choose a smaller file")
+            }
         }
+
         if (password !== confirmPassword) {
             newErr.push('Passwords do not match')
         }
-        if (image.size > 1000000){
-            newErr.push("Please choose a smaller file")
-        }
+
 
         setErrors(newErr);
         if (newErr.length > 0){

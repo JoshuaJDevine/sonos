@@ -21,8 +21,34 @@
 
     background-color: rgba(0, 0, 0, 0.2);
 }
+#modal-background-more {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: linear-gradient(167deg, rgba(210, 108, 29, 0.2), rgba(0, 0, 0, 0.8), rgba(255, 255, 255, 0.2));
+
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
 #modal-content {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 0 auto;
+    padding: 0 1.5rem 2rem;
+    color: #fafafa;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    box-shadow: inset 0 -1rem 1rem rgba(255, 255, 255, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    0.3rem 0.2rem 3rem rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(50px);
+    -webkit-backdrop-filter: blur(50px);
+}
+#modal-content-more {
     width: 100%;
     max-width: 100%;
     height: auto;

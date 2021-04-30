@@ -68,9 +68,7 @@ export const getUsersTracks = (userData) => async (dispatch) => {
 }
 
 export const AddNewTrackToPlaylist = (data) => async  (dispatch) => {
-    console.log("//TODO ADD TRACK", data.trackId, "TO PLAYLIST", data.playlistId);
-
-
+    // console.log("//TODO ADD TRACK", data.trackId, "TO PLAYLIST", data.playlistId);
     const res = await csrfFetch(`/api/playlist/addTrack/${data.trackId}/${data.playlistId}`, {
         method: "POST",
     });

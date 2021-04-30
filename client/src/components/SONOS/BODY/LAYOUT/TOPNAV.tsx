@@ -3,7 +3,7 @@ import React, {useEffect, useState} from "react";
 import {Link, Redirect} from "react-router-dom";
 
 
-import {Theme, useColor, useSize, useTheme} from '../../../../context/ThemeContext';
+import {Theme, useColor, useSize, useTheme, userAutoPlay} from '../../../../context/ThemeContext';
 import './TOPNAV.css'
 import * as sessionActions from "../../../../store/session";
 import {useDispatch, useSelector} from "react-redux";
@@ -16,6 +16,7 @@ export default function BODY__CONTENT___TOPNAV(){
     const { theme, setTheme} = useTheme();
     const { color, setColor} = useColor();
     const { size, setSize} = useSize();
+    const { autoPlay, setAutoPlay } = userAutoPlay();
     const [colorDisplayText, setColorDisplayText] = useState("Orange");
     const [sizeDisplayText, setSizeDisplayText] = useState("Med");
     const sessionUser = useSelector(state => state.session.user);
@@ -44,6 +45,13 @@ export default function BODY__CONTENT___TOPNAV(){
         } else if (color === "#7d4eb8") {
             setColor("#ff4500")
             setColorDisplayText("Orange")
+        }
+    }
+    const setAutoPlayer = function () {
+        if (autoPlay){
+            setAutoPlay(false);
+        } else {
+            setAutoPlay(true);
         }
     }
     const setWaveFormSize = function () {
@@ -81,6 +89,9 @@ export default function BODY__CONTENT___TOPNAV(){
                     </button>
                     <button onClick={setWaveFormSize}>
                         { sizeDisplayText }
+                    </button>
+                    <button onClick={setAutoPlayer}>
+                        { autoPlay ? "AutoPlay" : "Manual" }
                     </button>
                     <button onClick={handleLogout}>Logout</button>
                     <img id='userProfileImg' src={sessionUser.profileImageUrl != null ? sessionUser.profileImageUrl : '/img/musical-note_SM.png'} alt='musicNote'/>

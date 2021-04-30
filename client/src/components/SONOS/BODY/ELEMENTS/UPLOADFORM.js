@@ -9,17 +9,22 @@ import BODY__CONTENT from "../CONTENT";
 export default function BODY__ELEMENTS___UPLOADFORM(){
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    const [attemptUpload, setAttemptUpload] = useState(false);
+    const [uploadSuccess, setUploadSuccess] = useState(false);
+    const [uploadFailure, setUploadFailure] = useState(false);
     const [trackName, setTrackName] = useState("");
     const [track, setTrack] = useState(null);
     const [errors, setErrors] = useState([]);
 
 
     const handleSubmit = (e) => {
-
-        console.log("---------------------------------")
-        console.log("SONOS IS SENDING:")
-        console.log(trackName, track, sessionUser.id)
-        console.log("TO uploadNewTrack")
+        setAttemptUpload(true);
+        setUploadSuccess(false);
+        setUploadFailure(false);
+        // console.log("---------------------------------")
+        // console.log("SONOS IS SENDING:")
+        // console.log(trackName, track, sessionUser.id)
+        // console.log("TO uploadNewTrack")
 
         e.preventDefault();
 
@@ -29,9 +34,14 @@ export default function BODY__ELEMENTS___UPLOADFORM(){
                 .then(() => {
                     setTrackName("");
                     setTrack(null);
+                    setUploadSuccess(true);
+                    setAttemptUpload(false);
                 })
                 .catch(async (res) => {
                     const data = await res.json();
+                    setUploadFailure(true);
+                    setAttemptUpload(false);
+                    updateFile
                     if (data && data.errors) setErrors(data.errors);
                 });
         }
@@ -44,10 +54,12 @@ export default function BODY__ELEMENTS___UPLOADFORM(){
             if (track === null){
                 newErr.push("No track selected to upload.")
             }
-            if (track.name.match(regExp)[1] != ".mp3"){
+            if (track?.name?.match(regExp)[1] != ".mp3"){
                 newErr.push("Sonos currently only accepts MP3 files.")
             }
             setErrors(newErr);
+            setUploadFailure(true);
+            setAttemptUpload(false);
 
         }
     }
@@ -78,7 +90,19 @@ export default function BODY__ELEMENTS___UPLOADFORM(){
                 <label htmlFor='trackFile'>
                 </label>
                 <input type="file" id='trackFile' name='trackFile' onChange={updateFile} />
-                <button type="submit">Upload</button>
+                {attemptUpload?
+                    <>
+                        <p>Uploading... Please wait...</p>
+
+                    </>
+                    :
+                    <>
+                        {uploadSuccess? <p>{"Upload Succeed! Navigate to 'MY TRACKS to listen."}</p> : <></>}
+                        {uploadFailure? <p>{"There was an error processing this upload."}</p>: <></>}
+                        {uploadFailure? <p>{"Please try again."}</p>: <></>}
+                        <button type="submit">Upload</button>
+                    </>
+                }
             </form>
         </div>
     )

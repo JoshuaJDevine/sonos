@@ -14,35 +14,34 @@ import {getTrackLike, updateTrackLike} from "../../../../store/likes";
 import * as sessionActions from "../../../../store/session";
 import {Link, Redirect} from "react-router-dom";
 import {getUserPlaylist} from "../../../../store/playlist";
-import {getUsersTracks} from "../../../../store/track";
+import track, {getUsersTracks} from "../../../../store/track";
 import * as trackActions from "../../../../store/track";
 import ADDTOPLAYLISTMODAL from "./ADDTOPLAYLISTMODAL";
 
-import {Theme, useColor, useSize, useTheme} from '../../../../context/ThemeContext';
+import {useColor, useSize, userAutoPlay} from '../../../../context/ThemeContext';
 
 
 
 
-export default function Waveform({ url, trackId, activePlaylistId }) {
+export default function Waveform({ url, trackId, activePlaylistId, selectedPlaylist, changeTrack }) {
     const dispatch = useDispatch();
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);
+    const {autoPlay} = userAutoPlay();
+
     const [playing, setPlay] = useState(false);
     const [volume, setVolume] = useState(0.5);
     const [comment, setComment] = useState("")
     const [currentTrackId, setCurrentTrackId] = useState(null);
     const [showComments, setShowComments] = useState(false);
     const [waveformReady, setWaveformReady] = useState(false);
+    const [playlistIndex, setPlaylistIndex] = useState(0);
     const sessionUser = useSelector(state => state.session.user);
     const trackComments = useSelector(state => state.comments.trackComments)
     const trackLikeStatus = useSelector(state => state.likes.trackLike)
-
-
-
-
-
     const { color, setColor} = useColor();
     const { size, setSize} = useSize();
+
 // @ts-ignore
     const formWaveSurferOptions = ref => ({
         container: ref,
@@ -69,12 +68,7 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
         setPlay(false);
         setWaveformReady(false);
         dispatch(getTracksComments(trackId));
-
-
         const options = formWaveSurferOptions(waveformRef.current)
-
-        // console.log("Prepping load Wavesurfer");
-        // console.log("Setting trackId to", trackId);
         setCurrentTrackId(trackId);
 
         wavesurfer.current = WaveSurfer.create(options);
@@ -88,8 +82,27 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
                 setVolume(volume);
                 dispatch(getTrackLike(sessionUser.id, trackId));
                 setWaveformReady(true);
+                if (autoPlay){
+                    setPlay(true)
+                    wavesurfer.current.play();
+                }
             }
         });
+
+        wavesurfer.current.on("finish", function () {
+            if (wavesurfer.current){
+                setPlay(false)
+                if (autoPlay){
+                    if (playlistIndex === selectedPlaylist.length-2){
+                        setPlaylistIndex(-1)
+                    }else {
+                        let newIdx = playlistIndex + 1;
+                        setPlaylistIndex(newIdx)
+                    }
+                    changeTrack(selectedPlaylist[playlistIndex+1], selectedPlaylist);
+                }
+            }
+        })
 
         // Removes events, elements and disconnects Web Audio nodes.
         // when component unmount
@@ -100,6 +113,9 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
 
     }, [url]);
 
+    const handleAutoPlay = () => {
+        setAutoPlay(!autoPlay);
+    }
 
     const handlePlayPause = () => {
         setPlay(!playing);
@@ -171,7 +187,6 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
     }
 
 
-
     return (
         <div className='SONOS__WAVEFORM___WRAPPER'>
             <div className='WaveformLoader'>
@@ -181,6 +196,7 @@ export default function Waveform({ url, trackId, activePlaylistId }) {
             {waveformReady ?
                 <div className="controls">
                     <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
+                    <button onClick={handleAutoPlay}>{!autoPlay ? "Manual" : "Auto"}</button>
                     <ADDTOPLAYLISTMODAL trackId={trackId}/>
                     <input
                         className='SONOS__VOLUMESLIDER'

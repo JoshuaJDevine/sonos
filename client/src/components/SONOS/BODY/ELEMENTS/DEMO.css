@@ -6,3 +6,9 @@
     width: 100px;
     height: 60px;
 }
+#profilepic{
+    margin-top: 20px;
+    width: 75px;
+    height: auto;
+    border-radius: 60px;
+}

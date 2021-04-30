@@ -67,6 +67,10 @@ export default function BODY__CONTENT___MAIN(){
         setMainHeader(randomHeader);
     }, [mainHeader])
 
+    const changeTrack = (newTrack, playlist) => {
+        setSelectedPlaylist(playlist);
+        setSelectedTrack(newTrack)
+    }
 
     const handlePlaylistClick = (e) => {
         setCurrentActivePlaylistID(myPlaylists.usersPlaylists.Playlists[e.target.value].id);
@@ -75,13 +79,10 @@ export default function BODY__CONTENT___MAIN(){
     }
 
     const handleDiscover = (e) => {
-        console.log('//TODO DISCOVER!')
         dispatch(trackActions.getRandomTrack());
     }
 
     const handleCreateNewPlaylist = (e) => {
-        console.log('//TODO NEW LIST!')
-
         dispatch(trackActions.getUsersTracks(sessionUser.id)).then((res)=> {console.log(res)});
     }
 
@@ -97,8 +98,6 @@ export default function BODY__CONTENT___MAIN(){
     }
     else {
         return(
-
-
             <div className={`BODY__CONTENT___MAIN ` + theme} >
                 <img id='main_header' src={mainHeader} alt='sonos_logo'/>
 
@@ -147,7 +146,13 @@ export default function BODY__CONTENT___MAIN(){
                                 setSelectedTrack={setSelectedTrack}
                                 playlists={selectedPlaylist}
                             />
-                                <Waveform url={selectedTrack.url} trackId={selectedTrack.id} activePlaylistId={currentActivePlaylistID} />
+                                <Waveform
+                                    url={selectedTrack.url}
+                                    trackId={selectedTrack.id}
+                                    activePlaylistId={currentActivePlaylistID}
+                                    selectedPlaylist={selectedPlaylist}
+                                    changeTrack={changeTrack}
+                                />
                         </div>:
                         <div>
                             <p>There were no tracks in the selected playlist :( </p>

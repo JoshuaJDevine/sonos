@@ -8,6 +8,7 @@ import * as sessionActions from "../../../../store/session";
 
 function BODY__DEMOMODAL() {
     const [showModal, setShowModal] = useState(false);
+
     const dispatch = useDispatch();
 
     const handleDemo = () => {
