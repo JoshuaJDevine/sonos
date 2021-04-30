@@ -24,13 +24,13 @@ JS, JSX, Typescript, Node, Express, React, Redux, HTML5, CSS3
 * Guidelines for composers to upload their own tracks to create an ambient music in a style they enjoy
 
 
-##[WIP] Ambient track generation 
-###Concept
+## [WIP] Ambient track generation 
+### Concept
 Sonos will allow users to create continuously generated, infinitely morphing, ambient music in a variety of styles to
 suit any setting. Create your own beautiful ambient mixes by uploading layers and bases to contribute to the rich 
 tradition of experimental synthesized music.
 
-###General Guildines
+### General Guildines
 * Submissions are uploaded as sets. 
 * Sets must contain at least 3 bases and 2 layers. 
 * Submissions are accepted as MP3 format. 
@@ -45,7 +45,7 @@ You may use traditional instruments, digital instruments, synthesizers, recorded
 or any other means you have available to generate an interesting MP3 file. 
 Consider the following guidelines before submitting. 
   
-####BASES 
+#### BASES 
 * Bases with minimal harmonic implications will allow for the greatest variety of layers. 
 Multiple voices are preferred. 
 For example, slowly shifting chords in the Dorian mode that shift 
@@ -56,7 +56,7 @@ will allow layers to create these elements naturally through implication.
 * Bases that are 3 minutes or longer will more often result in interesting 
 variation of the motifs provided by the layers.
 
-####LAYERS 
+#### LAYERS 
 * Layers should contain a general variety in rhythm that morphs slowly more often than 
 it morphs quickly. Voices should be more limited in number than bases. 
 If multiple voices are included, consider using movements that imply harmony 
